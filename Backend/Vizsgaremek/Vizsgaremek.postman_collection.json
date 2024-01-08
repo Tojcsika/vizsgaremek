@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "072084f3-ee37-4d9a-99ad-97f624b15057",
+		"name": "Szakdolgozat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8424470"
+	},
+	"item": [
+		{
+			"name": "Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "vizsgaremekClient",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "mysecret",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Pa55w0rd!",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "vizsgaremekAPI",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:54098/connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "54098",
+					"path": [
+						"connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Bricks",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
