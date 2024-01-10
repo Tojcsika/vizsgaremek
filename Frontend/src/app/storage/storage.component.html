@@ -1,0 +1,47 @@
+<div>
+  <p-card>
+    <h3>{{ storage.Name }}</h3>
+    <div>Address: {{ storage.Address }}</div>
+    <div>Area: {{ storage.Area }}</div>
+  </p-card>
+  <p-table
+    [value]="storageRacks"
+    responsiveLayout="stack"
+    [breakpoint]="'960px'"
+    [tableStyle]="{ 'min-width': '20rem' }"
+  >
+    <ng-template pTemplate="caption">
+      <div>Storage racks</div>
+    </ng-template>
+    <ng-template pTemplate="header" let-storageRacks>
+      <tr>
+        <th>Row</th>
+        <th>Row position</th>
+        <th>Weight limit</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-storageRack let-storageRacks="columns">
+      <tr>
+        <td><span class="p-column-title">Row</span>{{ storageRack.Row }}</td>
+        <td>
+          <span class="p-column-title">Row position</span
+          >{{ storageRack.RowPosition }}
+        </td>
+        <td>
+          <span class="p-column-title">Weight limit</span
+          >{{ storageRack.WeightLimit }}
+        </td>
+        <td>
+          <span class="p-column-title">Actions</span>
+          <p-button icon="pi pi-eye" styleClass="col-12 mr-1"></p-button>
+          <p-button icon="pi pi-pencil" styleClass="col-12 mr-1"></p-button>
+          <p-button
+            icon="pi pi-trash"
+            styleClass="p-button-danger col-12 mr-1"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

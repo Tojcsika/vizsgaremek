@@ -1,0 +1,42 @@
+<div>
+  <p-table
+    [value]="storages"
+    responsiveLayout="stack"
+    [breakpoint]="'960px'"
+    [tableStyle]="{ 'min-width': '20rem' }"
+  >
+    <ng-template pTemplate="caption">
+      <div>Storages</div>
+    </ng-template>
+    <ng-template pTemplate="header" let-storages>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Area</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-storage let-storages="columns">
+      <tr>
+        <td><span class="p-column-title">Name</span>{{ storage.Name }}</td>
+        <td>
+          <span class="p-column-title">Address</span>{{ storage.Address }}
+        </td>
+        <td><span class="p-column-title">Area</span>{{ storage.Area }}</td>
+        <td>
+          <span class="p-column-title">Actions</span>
+          <p-button
+            icon="pi pi-eye"
+            styleClass="col-12 mr-1"
+            (onClick)="viewStorage(storage.Id)"
+          ></p-button>
+          <p-button icon="pi pi-pencil" styleClass="col-12 mr-1"></p-button>
+          <p-button
+            icon="pi pi-trash"
+            styleClass="p-button-danger col-12 mr-1"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
