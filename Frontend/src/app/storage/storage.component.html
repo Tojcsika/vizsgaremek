@@ -1,8 +1,18 @@
 <div>
   <p-card>
-    <h3>{{ storage.Name }}</h3>
-    <div>Address: {{ storage.Address }}</div>
-    <div>Area: {{ storage.Area }}</div>
+    <div class="inline-block col-4 card-top">
+      <h3 class="mt-0" style="text-align: center">{{ storage.Name }}</h3>
+      <div class="col-12">
+        <div>
+          <div class="inline-block col-6 pb-0 pt-0">Address:</div>
+          <div class="inline-block col-6 pb-0 pt-0">{{ storage.Address }}</div>
+        </div>
+        <div>
+          <div class="inline-block col-6 pb-0 pt-0">Area:</div>
+          <div class="inline-block col-6 pb-0 pt-0">{{ storage.Area }}</div>
+        </div>
+      </div>
+    </div>
   </p-card>
   <p-table
     [value]="storageRacks"
@@ -11,7 +21,7 @@
     [tableStyle]="{ 'min-width': '20rem' }"
   >
     <ng-template pTemplate="caption">
-      <div>Storage racks</div>
+      <h3 style="text-align: center">Storage racks</h3>
     </ng-template>
     <ng-template pTemplate="header" let-storageRacks>
       <tr>
@@ -34,11 +44,21 @@
         </td>
         <td>
           <span class="p-column-title">Actions</span>
-          <p-button icon="pi pi-eye" styleClass="col-12 mr-1"></p-button>
-          <p-button icon="pi pi-pencil" styleClass="col-12 mr-1"></p-button>
+          <p-button
+            icon="pi pi-eye"
+            styleClass="mr-1 p-2"
+            (onClick)="viewStorageRack(storageRack.Id)"
+            label="Shelves"
+          ></p-button>
+          <p-button
+            icon="pi pi-pencil"
+            styleClass="mr-1 p-2"
+            label="Edit"
+          ></p-button>
           <p-button
             icon="pi pi-trash"
-            styleClass="p-button-danger col-12 mr-1"
+            styleClass="p-button-danger mr-1 p-2"
+            label="Delete"
           ></p-button>
         </td>
       </tr>

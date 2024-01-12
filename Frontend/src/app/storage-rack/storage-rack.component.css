@@ -1,0 +1,5 @@
+.storage-card:hover {
+  background-color: #dcebf7;
+  border: 2px solid #cce6f8;
+  cursor: pointer;
+}

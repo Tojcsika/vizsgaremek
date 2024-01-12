@@ -1,4 +1,9 @@
 <div>
+  <app-storage-edit
+    [storageId]="storageEditId"
+    [visible]="editVisible"
+    (onClose)="editClosed()"
+  ></app-storage-edit>
   <p-table
     [value]="storages"
     responsiveLayout="stack"
@@ -6,7 +11,7 @@
     [tableStyle]="{ 'min-width': '20rem' }"
   >
     <ng-template pTemplate="caption">
-      <div>Storages</div>
+      <h3 style="text-align: center">Storages</h3>
     </ng-template>
     <ng-template pTemplate="header" let-storages>
       <tr>
@@ -27,13 +32,20 @@
           <span class="p-column-title">Actions</span>
           <p-button
             icon="pi pi-eye"
-            styleClass="col-12 mr-1"
+            styleClass="mr-1 p-2"
+            label="Storage racks"
             (onClick)="viewStorage(storage.Id)"
           ></p-button>
-          <p-button icon="pi pi-pencil" styleClass="col-12 mr-1"></p-button>
+          <p-button
+            icon="pi pi-pencil"
+            (onClick)="showEditDialog(storage.Id)"
+            styleClass="mr-1 p-2"
+            label="Edit"
+          ></p-button>
           <p-button
             icon="pi pi-trash"
-            styleClass="p-button-danger col-12 mr-1"
+            styleClass="p-button-danger mr-1 p-2"
+            label="Delete"
           ></p-button>
         </td>
       </tr>

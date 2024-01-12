@@ -35,4 +35,21 @@ export class StorageRackService implements OnInit {
     }
     return [];
   }
+
+  public getStorageRack(storageRackId: number) {
+    // this.http.get(this.storageRackUrl).subscribe((storages: any) => {
+    //   return storages;
+    // });
+    if (storageRackId == 1) {
+      var storageRack = {
+        Id: 1,
+        StorageId: 1,
+        Row: 1,
+        RowPosition: 1,
+        WeightLimit: 1200,
+      };
+      return storageRack;
+    }
+    return {};
+  }
 }

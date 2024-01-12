@@ -1,0 +1,130 @@
+<div>
+  <p-card>
+    <div
+      class="inline-block col-4 card-top storage-card"
+      (click)="viewStorage()"
+    >
+      <h3 class="mt-0" style="text-align: center">{{ storage.Name }}</h3>
+      <div class="col-12">
+        <div>
+          <div class="inline-block col-6 pb-0 pt-0">Address:</div>
+          <div class="inline-block col-6 pb-0 pt-0">{{ storage.Address }}</div>
+        </div>
+        <div>
+          <div class="inline-block col-6 pb-0 pt-0">Area:</div>
+          <div class="inline-block col-6 pb-0 pt-0">{{ storage.Area }}</div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="inline-block col-4 card-top storagerack-card"
+      style="vertical-align: top"
+      (click)="viewStorageRack()"
+    >
+      <h3 class="mt-0" style="text-align: center">Storage Rack</h3>
+      <div>
+        <div class="inline-block col-6 pb-0 pt-0">Row:</div>
+        <div class="inline-block col-6 pb-0 pt-0">{{ storageRack.Row }}</div>
+      </div>
+      <div>
+        <div class="inline-block col-6 pb-0 pt-0">Row position:</div>
+        <div class="inline-block col-6 pb-0 pt-0">
+          {{ storageRack.RowPosition }}
+        </div>
+      </div>
+      <div>
+        <div class="inline-block col-6 pb-0 pt-0">Weight limit:</div>
+        <div class="inline-block col-6 pb-0 pt-0">
+          {{ storageRack.WeightLimit }}
+        </div>
+      </div>
+    </div>
+    <div class="inline-block col-4 card-top" style="vertical-align: top">
+      <h3 class="mt-0" style="text-align: center">Shelf</h3>
+      <div>
+        <div class="inline-block col-3 pb-0 pt-0">Level:</div>
+        <div class="inline-block col-3 pb-0 pt-0">{{ shelf.Level }}</div>
+        <div class="inline-block col-3 pb-0 pt-0">Width:</div>
+        <div class="inline-block col-3 pb-0 pt-0">
+          {{ shelf.Width }}
+        </div>
+      </div>
+      <div>
+        <div class="inline-block col-3 pb-0 pt-0">Length:</div>
+        <div class="inline-block col-3 pb-0 pt-0">
+          {{ shelf.Width }}
+        </div>
+        <div class="inline-block col-3 pb-0 pt-0">Height:</div>
+        <div class="inline-block col-3 pb-0 pt-0">
+          {{ shelf.Height }}
+        </div>
+      </div>
+      <div>
+        <div class="inline-block col-3 pb-0 pt-0">Weight limit:</div>
+        <div class="inline-block col-3 pb-0 pt-0">
+          {{ shelf.WeightLimit }}
+        </div>
+      </div>
+    </div>
+  </p-card>
+  <p-table
+    [value]="shelf.Products"
+    responsiveLayout="stack"
+    [breakpoint]="'960px'"
+    [tableStyle]="{ 'min-width': '20rem' }"
+  >
+    <ng-template pTemplate="caption">
+      <h3 style="text-align: center">Products</h3>
+    </ng-template>
+    <ng-template pTemplate="header" let-shelfProducts>
+      <tr>
+        <th>Name</th>
+        <th>Weight</th>
+        <th>Quantity</th>
+        <th>Total weight</th>
+        <th>Width</th>
+        <th>Length</th>
+        <th>Height</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-shelfProduct let-shelfProducts="columns">
+      <tr>
+        <td><span class="p-column-title">Name</span>{{ shelfProduct.Name }}</td>
+        <td>
+          <span class="p-column-title">Weight</span>{{ shelfProduct.Weight }}
+        </td>
+        <td>
+          <span class="p-column-title">Quantity</span
+          >{{ shelfProduct.Quantity }}
+        </td>
+        <td>
+          <span class="p-column-title">Total weight</span
+          >{{ shelfProduct.TotalWeight }}
+        </td>
+        <td>
+          <span class="p-column-title">Width</span>{{ shelfProduct.Width }}
+        </td>
+        <td>
+          <span class="p-column-title">Length</span>{{ shelfProduct.Length }}
+        </td>
+        <td>
+          <span class="p-column-title">Height</span>{{ shelfProduct.Height }}
+        </td>
+        <td>
+          <span class="p-column-title">Actions</span>
+          <p-button
+            icon="pi pi-pencil"
+            styleClass="mr-1 p-2"
+            label="Edit"
+          ></p-button>
+          <p-button
+            icon="pi pi-trash"
+            styleClass="p-button-danger mr-1 p-2"
+            label="Delete"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

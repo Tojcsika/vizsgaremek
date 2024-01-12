@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, provideRouter } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -15,6 +15,7 @@ import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
 
 import { AppComponent } from './app.component';
 import { SigninRedirectCallbackComponent } from './signin-redirect-callback/signin-redirect-callback.component';
@@ -24,6 +25,9 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { UnauthorizedComponent } from './error-pages/unauthorized/unauthorized.component';
 import { StoragesComponent } from './storages/storages.component';
 import { StorageComponent } from './storage/storage.component';
+import { StorageRackComponent } from './storage-rack/storage-rack.component';
+import { ShelfComponent } from './shelf/shelf.component';
+import { StorageEditComponent } from './storage/storage-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,9 @@ import { StorageComponent } from './storage/storage.component';
     SigninRedirectCallbackComponent,
     StoragesComponent,
     StorageComponent,
+    StorageEditComponent,
+    StorageRackComponent,
+    ShelfComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +55,7 @@ import { StorageComponent } from './storage/storage.component';
     CheckboxModule,
     InputTextModule,
     TableModule,
+    DialogModule,
     RouterModule.forRoot([
       { path: 'storages', component: StoragesComponent, pathMatch: 'full' },
       {
@@ -55,12 +63,29 @@ import { StorageComponent } from './storage/storage.component';
         component: StorageComponent,
         pathMatch: 'full',
       },
+      {
+        path: 'storageracks/:storageRackId',
+        component: StorageRackComponent,
+        pathMatch: 'full',
+      },
+      // {
+      //   path: 'storageracks/:storageRackId/products',
+      //   component: StorageRackProductsComponent,
+      //   pathMatch: 'full',
+      // },
+      {
+        path: 'shelves/:shelfId',
+        component: ShelfComponent,
+        pathMatch: 'full',
+      },
       { path: 'signin-callback', component: SigninRedirectCallbackComponent },
-      { path: 'signout-callback', component: SignoutRedirectCallbackComponent },
+      {
+        path: 'signout-callback',
+        component: SignoutRedirectCallbackComponent,
+      },
       { path: 'unauthorized', component: UnauthorizedComponent },
       { path: '', redirectTo: '/storages', pathMatch: 'full' },
-      //{ path: '404', component: NotFoundComponent },
-      //{ path: '**', redirectTo: '/404', pathMatch: 'full' },
+      //{ path: '**', component: NotFoundComponent },
     ]),
   ],
   providers: [

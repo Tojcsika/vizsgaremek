@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class StoragesComponent implements OnInit {
   public userAuthenticated = false;
   storages: any;
+  storageEditId: any;
+  editVisible: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -31,8 +33,14 @@ export class StoragesComponent implements OnInit {
 
   viewStorage(storageId: number) {
     this.router.navigate(['/storage', storageId], { replaceUrl: true });
-    // .then(() => {
-    //   window.location.reload();
-    // });
+  }
+
+  showEditDialog(storageId: number) {
+    this.storageEditId = storageId;
+    this.editVisible = true;
+  }
+
+  editClosed() {
+    this.editVisible = false;
   }
 }
