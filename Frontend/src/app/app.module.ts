@@ -16,6 +16,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { AppComponent } from './app.component';
 import { SigninRedirectCallbackComponent } from './signin-redirect-callback/signin-redirect-callback.component';
@@ -27,7 +28,13 @@ import { StoragesComponent } from './storages/storages.component';
 import { StorageComponent } from './storage/storage.component';
 import { StorageRackComponent } from './storage-rack/storage-rack.component';
 import { ShelfComponent } from './shelf/shelf.component';
-import { StorageEditComponent } from './storage/storage-edit.component';
+import { StorageEditComponent } from './storages/storage-edit.component';
+import { StorageRackEditComponent } from './storage/storage-rack-edit.component';
+import { ShelfEditComponent } from './storage-rack/shelf-edit.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductEditComponent } from './products/product-edit.component';
+import { ShelfProductEditComponent } from './shelf/shelf-product-edit.component';
+import { SearchProductComponent } from './search-product/search-product.component';
 
 @NgModule({
   declarations: [
@@ -35,11 +42,17 @@ import { StorageEditComponent } from './storage/storage-edit.component';
     HeaderComponent,
     UnauthorizedComponent,
     SigninRedirectCallbackComponent,
+    ProductsComponent,
+    ProductEditComponent,
     StoragesComponent,
     StorageComponent,
     StorageEditComponent,
     StorageRackComponent,
+    StorageRackEditComponent,
     ShelfComponent,
+    ShelfEditComponent,
+    ShelfProductEditComponent,
+    SearchProductComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +69,7 @@ import { StorageEditComponent } from './storage/storage-edit.component';
     InputTextModule,
     TableModule,
     DialogModule,
+    DropdownModule,
     RouterModule.forRoot([
       { path: 'storages', component: StoragesComponent, pathMatch: 'full' },
       {
@@ -68,14 +82,19 @@ import { StorageEditComponent } from './storage/storage-edit.component';
         component: StorageRackComponent,
         pathMatch: 'full',
       },
-      // {
-      //   path: 'storageracks/:storageRackId/products',
-      //   component: StorageRackProductsComponent,
-      //   pathMatch: 'full',
-      // },
       {
         path: 'shelves/:shelfId',
         component: ShelfComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'products',
+        component: ProductsComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'searchProduct',
+        component: SearchProductComponent,
         pathMatch: 'full',
       },
       { path: 'signin-callback', component: SigninRedirectCallbackComponent },
@@ -85,7 +104,7 @@ import { StorageEditComponent } from './storage/storage-edit.component';
       },
       { path: 'unauthorized', component: UnauthorizedComponent },
       { path: '', redirectTo: '/storages', pathMatch: 'full' },
-      //{ path: '**', component: NotFoundComponent },
+      { path: '**', component: NotFoundComponent },
     ]),
   ],
   providers: [

@@ -20,4 +20,8 @@ export class AppComponent {
   public products = () => {
     this.router.navigate(['/products'], { replaceUrl: true });
   };
+
+  public searchProduct = () => {
+    this.router.navigate(['/searchProduct'], { replaceUrl: true });
+  };
 }

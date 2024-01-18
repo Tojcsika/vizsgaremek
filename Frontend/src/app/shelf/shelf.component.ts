@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { StorageRackService } from '../services/storageRack.service';
+import { StorageRackService } from '../services/storage-rack.service';
 import { StorageService } from '../services/storage.service';
 import { ShelfService } from '../services/shelf.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +16,8 @@ export class ShelfComponent implements OnInit {
   storageRack: any = {};
   storage: any = {};
   shelf: any = {};
+  shelfProductEditId: any;
+  editVisible: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -35,6 +37,7 @@ export class ShelfComponent implements OnInit {
       this.userAuthenticated = userAuthenticated;
       if (this.shelfId != null) {
         this.shelf = this.shelfService.getShelf(this.shelfId);
+        console.log(this.shelf);
         this.storageRack = this.storageRackService.getStorageRack(
           this.shelf.StorageRackId
         );
@@ -57,5 +60,22 @@ export class ShelfComponent implements OnInit {
     this.router.navigate([`/storageracks/${this.storageRack.Id}`], {
       replaceUrl: true,
     });
+  }
+
+  showEditDialog(shelfProductId?: number) {
+    this.shelfProductEditId = shelfProductId;
+    this.editVisible = true;
+  }
+
+  editClosed() {
+    this.editVisible = false;
+  }
+
+  confirmDelete(shelfProductId: number) {
+    if(confirm(`Are you sure to delete the Products from the Shelf?`)) {
+      // HTTP DELETE storage
+      // HA OK
+      this.shelf.ShelfProducts = this.shelf.ShelfProducts.filter(function(shelfProduct: any) { return shelfProduct.Id != shelfProductId })
+    }
   }
 }

@@ -3,3 +3,7 @@
   border: 2px solid #cce6f8;
   cursor: pointer;
 }
+
+.p-card-content {
+  padding: 0px;
+}

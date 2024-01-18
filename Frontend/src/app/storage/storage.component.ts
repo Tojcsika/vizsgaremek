@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { StorageRackService } from '../services/storageRack.service';
+import { StorageRackService } from '../services/storage-rack.service';
 import { StorageService } from '../services/storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -13,7 +13,9 @@ export class StorageComponent implements OnInit {
   public userAuthenticated = false;
   storageId: any;
   storageRacks: any;
+  storageRackEditId: any;
   storage: any = {};
+  editVisible: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -43,5 +45,22 @@ export class StorageComponent implements OnInit {
     this.router.navigate([`/storageracks/${storageRackId}`], {
       replaceUrl: true,
     });
+  }
+
+  showEditDialog(storageRackId?: number) {
+    this.storageRackEditId = storageRackId;
+    this.editVisible = true;
+  }
+
+  editClosed() {
+    this.editVisible = false;
+  }
+
+  confirmDelete(storageRackId: number) {
+    if(confirm(`Are you sure to delete the Storage Rack?`)) {
+      // HTTP DELETE storage
+      // HA OK
+      this.storageRacks = this.storageRacks.filter(function(storageRack: any) { return storageRack.Id != storageRackId })
+    }
   }
 }

@@ -1,0 +1,68 @@
+<div>
+  <app-product-edit
+    [productId]="productEditId"
+    [visible]="editVisible"
+    (onClose)="editClosed()"
+  ></app-product-edit>
+  <p-table
+    [value]="products"
+    responsiveLayout="stack"
+    [breakpoint]="'960px'"
+    [tableStyle]="{ 'min-width': '20rem' }"
+  >
+    <ng-template pTemplate="caption">
+      <h3 style="text-align: center">Products</h3>
+      <div>
+        <p-button
+          icon="pi pi-plus"
+          (onClick)="showEditDialog()"
+          styleClass="p-button-success p-2 col-12 m-0"
+          label="Add"
+        ></p-button></div>
+    </ng-template>
+    <ng-template pTemplate="header" let-products>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Area</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-products="columns">
+      <tr>
+        <td>
+          <span class="p-column-title">Name</span>{{ product.Name }}
+        </td>
+        <td>
+          <span class="p-column-title">Width</span>{{ product.Width }}
+          <span class="p-column-title">Width</span>{{ product.Width }}
+        </td>
+        <td>
+          <span class="p-column-title">Length</span>{{ product.Length }}
+        </td>
+        <td>
+          <span class="p-column-title">Height</span>{{ product.Height }}
+        </td>
+        <td>
+          <span class="p-column-title">Weight</span>{{ product.Weight }}
+        </td>
+        <td>
+          <span class="p-column-title">Description</span>{{ product.Description }}</td>
+        <td>
+          <p-button
+            icon="pi pi-pencil"
+            (onClick)="showEditDialog(product.Id)"
+            styleClass="mr-1 p-2 mb-2"
+            label="Edit"
+          ></p-button>
+          <p-button
+            icon="pi pi-trash"
+            styleClass="p-button-danger mr-1 p-2 mb-2"
+            (onClick)="confirmDelete(product.Id, product.Name)"
+            label="Delete"
+          ></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

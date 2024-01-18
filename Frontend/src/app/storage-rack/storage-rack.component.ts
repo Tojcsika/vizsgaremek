@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { StorageRackService } from '../services/storageRack.service';
+import { StorageRackService } from '../services/storage-rack.service';
 import { StorageService } from '../services/storage.service';
 import { ShelfService } from '../services/shelf.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,6 +16,8 @@ export class StorageRackComponent implements OnInit {
   storageRack: any = {};
   storage: any = {};
   storageRackShelves: any;
+  shelfEditId: any;
+  editVisible: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -59,7 +61,23 @@ export class StorageRackComponent implements OnInit {
   }
 
   viewStorage() {
-    console.log('asd');
     this.router.navigate(['/storage', this.storage.Id], { replaceUrl: true });
+  }
+
+  showEditDialog(shelfId?: number) {
+    this.shelfEditId = shelfId;
+    this.editVisible = true;
+  }
+
+  editClosed() {
+    this.editVisible = false;
+  }
+
+  confirmDelete(shelfId: number) {
+    if(confirm(`Are you sure to delete the Shelf?`)) {
+      // HTTP DELETE storage
+      // HA OK
+      this.storageRackShelves = this.storageRackShelves.filter(function(storageRackShelf: any) { return storageRackShelf.Id != shelfId })
+    }
   }
 }

@@ -50,8 +50,9 @@ export class ShelfService implements OnInit {
         Length: 200,
         Height: 300,
         WeightLimit: 200,
-        Products: [
+        ShelfProducts: [
           {
+            Id: 1,
             Name: 'Alma',
             Weight: 0.1,
             Quantity: 230,

@@ -1,4 +1,9 @@
 <div>
+  <app-storage-rack-edit
+    [storageRackId]="storageRackEditId"
+    [visible]="editVisible"
+    (onClose)="editClosed()"
+  ></app-storage-rack-edit>
   <p-card>
     <div class="inline-block col-4 card-top">
       <h3 class="mt-0" style="text-align: center">{{ storage.Name }}</h3>
@@ -21,7 +26,15 @@
     [tableStyle]="{ 'min-width': '20rem' }"
   >
     <ng-template pTemplate="caption">
-      <h3 style="text-align: center">Storage racks</h3>
+      <div>
+        <h3 style="text-align: center">Storage racks</h3>
+        <p-button
+          icon="pi pi-plus"
+          (onClick)="showEditDialog()"
+          styleClass="p-button-success p-2 col-12 m-0"
+          label="Add"
+        ></p-button>
+      </div>
     </ng-template>
     <ng-template pTemplate="header" let-storageRacks>
       <tr>
@@ -43,7 +56,6 @@
           >{{ storageRack.WeightLimit }}
         </td>
         <td>
-          <span class="p-column-title">Actions</span>
           <p-button
             icon="pi pi-eye"
             styleClass="mr-1 p-2"
@@ -53,11 +65,13 @@
           <p-button
             icon="pi pi-pencil"
             styleClass="mr-1 p-2"
+            (onClick)="showEditDialog(storageRack.Id)"
             label="Edit"
           ></p-button>
           <p-button
             icon="pi pi-trash"
             styleClass="p-button-danger mr-1 p-2"
+            (onClick)="confirmDelete(storageRack.Id)"
             label="Delete"
           ></p-button>
         </td>

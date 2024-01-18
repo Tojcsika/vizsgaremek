@@ -1,0 +1,32 @@
+<p-dialog
+  header="Storage rack"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="onHide()"
+  (onShow)="onShow()"
+>
+  <div>
+    <div>
+      <div class="col-12 md:col-6 inline-block">Row</div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="int" placeholder="Row" [(ngModel)]="storageRack.Row" /></div>
+    </div>
+    <div>
+      <div class="col-12 md:col-6 inline-block">Row position</div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="int" placeholder="Row position" [(ngModel)]="storageRack.RowPosition" /></div>
+    </div>
+    <div>
+      <div class="col-12 md:col-6 inline-block">Weight limit</div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Weight limit" [(ngModel)]="storageRack.WeightLimit" /></div>
+    </div>
+  </div>
+  <div class="text-right">
+    <p-button
+      icon="pi pi-save"
+      styleClass="mr-2 mt-1 p-2"
+      (onClick)="saveStorageRack()"
+      label="Save"
+    ></p-button></div>
+</p-dialog>

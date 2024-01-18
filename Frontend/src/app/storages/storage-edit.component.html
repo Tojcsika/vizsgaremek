@@ -1,0 +1,32 @@
+<p-dialog
+  [header]="storage.Name"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="onHide()"
+  (onShow)="onShow()"
+>
+  <div>
+    <div>
+      <div class="col-12 md:col-6 inline-block">Name</div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText placeholder="Name" [(ngModel)]="storage.Name" /></div>
+    </div>
+    <div>
+      <div class="col-12 md:col-6 inline-block">Address</div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText placeholder="Address" [(ngModel)]="storage.Address" /></div>
+    </div>
+    <div>
+      <div class="col-12 md:col-6 inline-block">Area</div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Area" [(ngModel)]="storage.Area" /></div>
+    </div>
+  </div>
+  <div class="text-right">
+    <p-button
+      icon="pi pi-save"
+      styleClass="mr-2 mt-1 p-2"
+      (onClick)="saveStorage()"
+      label="Save"
+    ></p-button></div>
+</p-dialog>

@@ -1,0 +1,40 @@
+<p-dialog
+  header="Shelf"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="onHide()"
+  (onShow)="onShow()"
+>
+  <div>
+    <div>
+      <div class="col-12 md:col-6 inline-block">Level</div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="int" placeholder="Level" [(ngModel)]="shelf.Level" /></div>
+    </div>
+    <div>
+      <div class="col-12 md:col-6 inline-block">Width</div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Width" [(ngModel)]="shelf.Width" /></div>
+    </div>
+    <div>
+      <div class="col-12 md:col-6 inline-block">Length</div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Length" [(ngModel)]="shelf.Length" /></div>
+    </div>
+    <div>
+      <div class="col-12 md:col-6 inline-block">Height</div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Height" [(ngModel)]="shelf.Height" /></div>
+    </div>
+    <div>
+      <div class="col-12 md:col-6 inline-block">Weight limit</div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Weight limit" [(ngModel)]="shelf.WeightLimit" /></div>
+    </div>
+  </div>
+  <div class="text-right">
+    <p-button
+      icon="pi pi-save"
+      styleClass="mr-2 mt-1 p-2"
+      (onClick)="saveShelf()"
+      label="Save"
+    ></p-button></div>
+</p-dialog>

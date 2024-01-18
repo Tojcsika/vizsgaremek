@@ -1,4 +1,9 @@
 <div>
+  <app-shelf-product-edit
+    [shelfProductId]="shelfProductEditId"
+    [visible]="editVisible"
+    (onClose)="editClosed()"
+  ></app-shelf-product-edit>
   <p-card>
     <div
       class="inline-block col-4 card-top storage-card"
@@ -68,13 +73,21 @@
     </div>
   </p-card>
   <p-table
-    [value]="shelf.Products"
+    [value]="shelf.ShelfProducts"
     responsiveLayout="stack"
     [breakpoint]="'960px'"
     [tableStyle]="{ 'min-width': '20rem' }"
   >
     <ng-template pTemplate="caption">
       <h3 style="text-align: center">Products</h3>
+      <div>
+        <p-button
+          icon="pi pi-plus"
+          (onClick)="showEditDialog()"
+          styleClass="p-button-success p-2 col-12 m-0"
+          label="Add"
+        ></p-button>
+      </div>
     </ng-template>
     <ng-template pTemplate="header" let-shelfProducts>
       <tr>
@@ -116,11 +129,13 @@
           <p-button
             icon="pi pi-pencil"
             styleClass="mr-1 p-2"
+            (onClick)="showEditDialog(shelfProduct.Id)"
             label="Edit"
           ></p-button>
           <p-button
             icon="pi pi-trash"
             styleClass="p-button-danger mr-1 p-2"
+            (onClick)="confirmDelete(shelfProduct.Id)"
             label="Delete"
           ></p-button>
         </td>

@@ -1,4 +1,9 @@
 <div>
+  <app-shelf-edit
+    [shelfId]="shelfEditId"
+    [visible]="editVisible"
+    (onClose)="editClosed()"
+  ></app-shelf-edit>
   <p-card>
     <div
       class="inline-block col-4 card-top storage-card"
@@ -44,6 +49,13 @@
   >
     <ng-template pTemplate="caption">
       <h3 style="text-align: center">Shelves</h3>
+      <div>
+        <p-button
+          icon="pi pi-plus"
+          (onClick)="showEditDialog()"
+          styleClass="p-button-success p-2 col-12 m-0"
+          label="Add"
+        ></p-button></div>
     </ng-template>
     <ng-template pTemplate="header" let-storageRackShelves>
       <tr>
@@ -80,7 +92,6 @@
           >{{ storageRackShelf.WeightLimit }}
         </td>
         <td>
-          <span class="p-column-title">Actions</span>
           <p-button
             icon="pi pi-eye"
             styleClass="mr-1 p-2"
@@ -90,11 +101,13 @@
           <p-button
             icon="pi pi-pencil"
             styleClass="mr-1 p-2"
+            (onClick)="showEditDialog(storageRackShelf.Id)"
             label="Edit"
           ></p-button>
           <p-button
             icon="pi pi-trash"
             styleClass="p-button-danger mr-1 p-2"
+            (onClick)="confirmDelete(storageRackShelf.Id)"
             label="Delete"
           ></p-button>
         </td>

@@ -12,6 +12,13 @@
   >
     <ng-template pTemplate="caption">
       <h3 style="text-align: center">Storages</h3>
+      <div>
+        <p-button
+          icon="pi pi-plus"
+          (onClick)="showEditDialog()"
+          styleClass="p-button-success p-2 col-12 m-0"
+          label="Add"
+        ></p-button></div>
     </ng-template>
     <ng-template pTemplate="header" let-storages>
       <tr>
@@ -29,22 +36,22 @@
         </td>
         <td><span class="p-column-title">Area</span>{{ storage.Area }}</td>
         <td>
-          <span class="p-column-title">Actions</span>
           <p-button
             icon="pi pi-eye"
-            styleClass="mr-1 p-2"
+            styleClass="mr-1 p-2 mb-2"
             label="Storage racks"
             (onClick)="viewStorage(storage.Id)"
           ></p-button>
           <p-button
             icon="pi pi-pencil"
             (onClick)="showEditDialog(storage.Id)"
-            styleClass="mr-1 p-2"
+            styleClass="mr-1 p-2 mb-2"
             label="Edit"
           ></p-button>
           <p-button
             icon="pi pi-trash"
-            styleClass="p-button-danger mr-1 p-2"
+            styleClass="p-button-danger mr-1 p-2 mb-2"
+            (onClick)="confirmDelete(storage.Id, storage.Name)"
             label="Delete"
           ></p-button>
         </td>

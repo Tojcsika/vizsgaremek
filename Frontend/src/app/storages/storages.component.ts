@@ -35,12 +35,20 @@ export class StoragesComponent implements OnInit {
     this.router.navigate(['/storage', storageId], { replaceUrl: true });
   }
 
-  showEditDialog(storageId: number) {
+  showEditDialog(storageId?: number) {
     this.storageEditId = storageId;
     this.editVisible = true;
   }
 
   editClosed() {
     this.editVisible = false;
+  }
+
+  confirmDelete(storageId: number, storageName: string) {
+    if(confirm(`Are you sure to delete ${storageName}?`)) {
+      // HTTP DELETE storage
+      // HA OK
+      this.storages = this.storages.filter(function(storage: any) { return storage.Id != storageId })
+    }
   }
 }

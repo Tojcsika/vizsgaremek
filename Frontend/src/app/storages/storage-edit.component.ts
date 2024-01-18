@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   Input,
-  AfterViewInit,
   EventEmitter,
   Output,
 } from '@angular/core';
@@ -15,7 +14,7 @@ import { StorageService } from '../services/storage.service';
   styleUrls: ['./storage-edit.component.css'],
 })
 export class StorageEditComponent implements OnInit {
-  @Input() storageId!: number;
+  @Input() storageId?: number;
   @Input() visible!: boolean;
   @Output() onClose = new EventEmitter();
 
@@ -30,7 +29,6 @@ export class StorageEditComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isAuthenticated().then((userAuthenticated) => {
       this.userAuthenticated = userAuthenticated;
-      this.storage = this.storageService.getStorage(this.storageId);
     });
 
     this.authService.loginChanged.subscribe((userAuthenticated) => {
@@ -38,7 +36,25 @@ export class StorageEditComponent implements OnInit {
     });
   }
 
+  onShow() {
+    if (this.storageId != null) {
+      this.storage = this.storageService.getStorage(this.storageId);
+    }
+    else{
+      this.storage = {
+        Name: "",
+        Address: "",
+        Area: null
+      }
+    }
+  }
+
   onHide() {
     this.onClose.emit();
+  }
+
+  saveStorage() {
+    // HTTP POST mentéshez
+    this.visible = false;
   }
 }
