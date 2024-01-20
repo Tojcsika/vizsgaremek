@@ -14,14 +14,14 @@ export class AppComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   public storages = () => {
-    this.router.navigate(['/storages'], { replaceUrl: true });
+    this.router.navigate(['/storages']);
   };
 
   public products = () => {
-    this.router.navigate(['/products'], { replaceUrl: true });
+    this.router.navigate(['/products']);
   };
 
   public searchProduct = () => {
-    this.router.navigate(['/searchProduct'], { replaceUrl: true });
+    this.router.navigate(['/searchProduct']);
   };
 }

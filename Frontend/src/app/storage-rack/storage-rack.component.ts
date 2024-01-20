@@ -55,13 +55,11 @@ export class StorageRackComponent implements OnInit {
   }
 
   viewProducts(shelfId: number) {
-    this.router.navigate([`/shelves/${shelfId}`], {
-      replaceUrl: true,
-    });
+    this.router.navigate([`/shelves/${shelfId}`]);
   }
 
   viewStorage() {
-    this.router.navigate(['/storage', this.storage.Id], { replaceUrl: true });
+    this.router.navigate(['/storage', this.storage.Id]);
   }
 
   showEditDialog(shelfId?: number) {

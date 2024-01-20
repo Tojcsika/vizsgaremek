@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit {
   }
 
   viewProduct(productId: number) {
-    this.router.navigate(['/product', productId], { replaceUrl: true });
+    this.router.navigate(['/product', productId]);
   }
 
   showEditDialog(productId?: number) {

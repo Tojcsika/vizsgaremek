@@ -13,6 +13,7 @@ export class SearchProductComponent implements OnInit {
   products: any;
   productEditId: any;
   editVisible: boolean = false;
+  searchString: any = "";
 
   constructor(
     private authService: AuthService,
@@ -31,24 +32,11 @@ export class SearchProductComponent implements OnInit {
     });
   }
 
-  viewProduct(productId: number) {
-    this.router.navigate(['/product', productId], { replaceUrl: true });
+  viewProductAvailability(productId: number){
+    this.router.navigate(['/productAvailability', productId]);
   }
 
-  showEditDialog(productId?: number) {
-    this.productEditId = productId;
-    this.editVisible = true;
-  }
-
-  editClosed() {
-    this.editVisible = false;
-  }
-
-  confirmDelete(productId: number, productName: string) {
-    if(confirm(`Are you sure to delete ${productName}?`)) {
-      // HTTP DELETE storage
-      // HA OK
-      this.products = this.products.filter(function(product: any) { return product.Id != productId })
-    }
+  searchProduct(searchString: string) {
+    this.products = this.productService.searchProduct(searchString);
   }
 }

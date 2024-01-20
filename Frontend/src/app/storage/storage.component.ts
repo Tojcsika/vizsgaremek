@@ -42,9 +42,7 @@ export class StorageComponent implements OnInit {
   }
 
   viewStorageRack(storageRackId: number) {
-    this.router.navigate([`/storageracks/${storageRackId}`], {
-      replaceUrl: true,
-    });
+    this.router.navigate([`/storageracks/${storageRackId}`]);
   }
 
   showEditDialog(storageRackId?: number) {

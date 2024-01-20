@@ -32,7 +32,7 @@ export class StoragesComponent implements OnInit {
   }
 
   viewStorage(storageId: number) {
-    this.router.navigate(['/storage', storageId], { replaceUrl: true });
+    this.router.navigate(['/storage', storageId]);
   }
 
   showEditDialog(storageId?: number) {

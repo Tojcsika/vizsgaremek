@@ -1,9 +1,4 @@
 <div>
-  <app-product-edit
-    [productId]="productEditId"
-    [visible]="editVisible"
-    (onClose)="editClosed()"
-  ></app-product-edit>
   <p-table
     [value]="products"
     responsiveLayout="stack"
@@ -11,20 +6,19 @@
     [tableStyle]="{ 'min-width': '20rem' }"
   >
     <ng-template pTemplate="caption">
-      <h3 style="text-align: center">Products</h3>
+      <h3 style="text-align: center">Search Product</h3>
       <div>
-        <p-button
-          icon="pi pi-plus"
-          (onClick)="showEditDialog()"
-          styleClass="p-button-success p-2 col-12 m-0"
-          label="Add"
-        ></p-button></div>
+        <input class="col-12" pInputText placeholder="Search..." [(ngModel)]="searchString" (ngModelChange)="searchProduct(searchString)" />
+      </div>
     </ng-template>
     <ng-template pTemplate="header" let-products>
       <tr>
         <th>Name</th>
-        <th>Address</th>
-        <th>Area</th>
+        <th>Width</th>
+        <th>Length</th>
+        <th>Height</th>
+        <th>Weight</th>
+        <th>Description</th>
         <th>Actions</th>
       </tr>
     </ng-template>
@@ -34,7 +28,6 @@
           <span class="p-column-title">Name</span>{{ product.Name }}
         </td>
         <td>
-          <span class="p-column-title">Width</span>{{ product.Width }}
           <span class="p-column-title">Width</span>{{ product.Width }}
         </td>
         <td>
@@ -50,16 +43,10 @@
           <span class="p-column-title">Description</span>{{ product.Description }}</td>
         <td>
           <p-button
-            icon="pi pi-pencil"
-            (onClick)="showEditDialog(product.Id)"
+            icon="pi pi-eye"
+            (onClick)="viewProductAvailability(product.Id)"
             styleClass="mr-1 p-2 mb-2"
-            label="Edit"
-          ></p-button>
-          <p-button
-            icon="pi pi-trash"
-            styleClass="p-button-danger mr-1 p-2 mb-2"
-            (onClick)="confirmDelete(product.Id, product.Name)"
-            label="Delete"
+            label="View product availability"
           ></p-button>
         </td>
       </tr>

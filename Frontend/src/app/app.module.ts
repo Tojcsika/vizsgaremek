@@ -35,6 +35,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductEditComponent } from './products/product-edit.component';
 import { ShelfProductEditComponent } from './shelf/shelf-product-edit.component';
 import { SearchProductComponent } from './search-product/search-product.component';
+import { ProductAvailabilityComponent } from './product-availability/product-availability.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { SearchProductComponent } from './search-product/search-product.componen
     ShelfComponent,
     ShelfEditComponent,
     ShelfProductEditComponent,
-    SearchProductComponent
+    SearchProductComponent,
+    ProductAvailabilityComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +97,11 @@ import { SearchProductComponent } from './search-product/search-product.componen
       {
         path: 'searchProduct',
         component: SearchProductComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'productAvailability/:productId',
+        component: ProductAvailabilityComponent,
         pathMatch: 'full',
       },
       { path: 'signin-callback', component: SigninRedirectCallbackComponent },

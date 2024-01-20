@@ -81,32 +81,29 @@ export class ProductService implements OnInit {
     return product;
   }
 
-  public getProductsOnShelf(shelfId: number) {
+  public searchProduct(searchString: string) {
     // this.http.get(this.shelfUrl).subscribe((storages: any) => {
     //   return storages;
     // });
-    if (shelfId == 1) {
-      return [
-        {
-          Id: 1,
-          StorageRackId: 1,
-          Level: 1,
-          Width: 100,
-          Length: 200,
-          Height: 300,
-          WeightLimit: 200,
-        },
-        {
-          Id: 2,
-          StorageRackId: 1,
-          Level: 2,
-          Width: 100,
-          Length: 200,
-          Height: 450,
-          WeightLimit: 200,
-        },
-      ];
-    }
-    return []
+    return [
+      {
+        Id: 1,
+        Name: "Toy Train",
+        Width: 10,
+        Length: 20,
+        Height: 5,
+        Weight: 50,
+        Description: "Wooden train set"
+      },
+      {
+        Id: 3,
+        Name: "Teddy Bear",
+        Width: 12,
+        Length: 10,
+        Height: 8,
+        Weight: 20,
+        Description: "Soft and cuddly bear"
+      }
+    ]
   }
 }

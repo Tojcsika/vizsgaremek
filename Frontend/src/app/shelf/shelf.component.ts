@@ -37,7 +37,6 @@ export class ShelfComponent implements OnInit {
       this.userAuthenticated = userAuthenticated;
       if (this.shelfId != null) {
         this.shelf = this.shelfService.getShelf(this.shelfId);
-        console.log(this.shelf);
         this.storageRack = this.storageRackService.getStorageRack(
           this.shelf.StorageRackId
         );
@@ -53,13 +52,11 @@ export class ShelfComponent implements OnInit {
   }
 
   viewStorage() {
-    this.router.navigate(['/storage', this.storage.Id], { replaceUrl: true });
+    this.router.navigate(['/storage', this.storage.Id]);
   }
 
   viewStorageRack() {
-    this.router.navigate([`/storageracks/${this.storageRack.Id}`], {
-      replaceUrl: true,
-    });
+    this.router.navigate([`/storageracks/${this.storageRack.Id}`]);
   }
 
   showEditDialog(shelfProductId?: number) {

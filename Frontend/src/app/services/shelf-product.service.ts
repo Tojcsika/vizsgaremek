@@ -27,4 +27,62 @@ export class ShelfProductService implements OnInit {
     }
     return {};
   }
+
+  // public getProductsOnShelf(shelfId: number) {
+  //   // this.http.get(this.shelfUrl).subscribe((storages: any) => {
+  //   //   return storages;
+  //   // });
+  //   if (shelfId == 1) {
+  //     return [
+  //       {
+  //         Id: 1,
+  //         StorageRackId: 1,
+  //         Level: 1,
+  //         Width: 100,
+  //         Length: 200,
+  //         Height: 300,
+  //         WeightLimit: 200,
+  //       },
+  //       {
+  //         Id: 2,
+  //         StorageRackId: 1,
+  //         Level: 2,
+  //         Width: 100,
+  //         Length: 200,
+  //         Height: 450,
+  //         WeightLimit: 200,
+  //       },
+  //     ];
+  //   }
+  //   return []
+  // }
+
+  public getProductShelves(productId: number) {
+    return [
+      {
+        Id: 1,
+        ProductId: 1,
+        ProductName: 'Alma',
+        ProductWeight: 0.1,
+        ShelfId: 1,
+        ShelfProductQuantity: 230,
+        StorageName: 'Raktár 1',
+        StorageRackRow: 1,
+        StorageRackRowPosition: 1,
+        ShelfLevel: 1
+      },
+      {
+        Id: 2,
+        ProductId: 1,
+        ProductName: 'Alma',
+        ProductWeight: 0.1,
+        ShelfId: 2,
+        ShelfProductQuantity: 20,
+        StorageName: 'Raktár 2',
+        StorageRackRow: 2,
+        StorageRackRowPosition: 3,
+        ShelfLevel: 4
+      }
+    ]
+  }
 }
