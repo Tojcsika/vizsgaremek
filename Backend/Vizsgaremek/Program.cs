@@ -1,9 +1,10 @@
-using Vizsgaremek.Data;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using MapsterMapper;
+using Vizsgaremek.Data;
 using Vizsgaremek.Repositories;
-using Vizsgaremek.Helpers;
+using Vizsgaremek.Repositories.Interfaces;
+using Vizsgaremek.Services;
+using Vizsgaremek.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,13 +40,22 @@ builder.Services.AddControllers();
 
 // EF DBContext
 builder.Services.AddDbContext<DatabaseContext>(opt =>
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
+    opt.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
 
 // Repositories
-builder.Services.AddScoped<IBrickRepository, BrickRepository>();
+builder.Services.AddScoped<IStorageRepository, StorageRepository>();
+builder.Services.AddScoped<IStorageRackRepository, StorageRackRepository>();
+builder.Services.AddScoped<IShelfRepository, ShelfRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IShelfProductRepository, ShelfProductRepository>();
 
-// Mapster
-builder.Services.AddTransient<IMapper, Mapper>();
+// Services
+builder.Services.AddScoped<IStorageService, StorageService>();
+builder.Services.AddScoped<IStorageRackService, StorageRackService>();
+builder.Services.AddScoped<IShelfService, ShelfService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IShelfProductService, ShelfProductService>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -63,7 +73,6 @@ using (var scope = app.Services.CreateScope())
     try
     {
         DatabaseSeed.Initialize(services.GetRequiredService<DatabaseContext>());
-        BrickHelper.Configure(services.GetRequiredService<IBrickRepository>());
     }
     catch (Exception ex)
     {

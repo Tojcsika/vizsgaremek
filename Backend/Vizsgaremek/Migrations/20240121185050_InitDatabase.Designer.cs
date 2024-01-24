@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vizsgaremek.Data;
 
@@ -11,9 +12,10 @@ using Vizsgaremek.Data;
 namespace Vizsgaremek.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240121185050_InitDatabase")]
+    partial class InitDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +24,7 @@ namespace Vizsgaremek.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Vizsgaremek.Entities.Product", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.ProductEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,11 +38,11 @@ namespace Vizsgaremek.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("Height")
-                        .HasColumnType("float");
+                    b.Property<int?>("Height")
+                        .HasColumnType("int");
 
-                    b.Property<double?>("Length")
-                        .HasColumnType("float");
+                    b.Property<int?>("Length")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -49,18 +51,18 @@ namespace Vizsgaremek.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double?>("Weight")
-                        .HasColumnType("float");
+                    b.Property<int?>("Weight")
+                        .HasColumnType("int");
 
-                    b.Property<double?>("Width")
-                        .HasColumnType("float");
+                    b.Property<int?>("Width")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Vizsgaremek.Entities.Shelf", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.ShelfEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,11 +73,11 @@ namespace Vizsgaremek.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Height")
-                        .HasColumnType("float");
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
 
-                    b.Property<double>("Length")
-                        .HasColumnType("float");
+                    b.Property<int>("Length")
+                        .HasColumnType("int");
 
                     b.Property<int>("Level")
                         .HasColumnType("int");
@@ -86,11 +88,11 @@ namespace Vizsgaremek.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double?>("WeightLimit")
-                        .HasColumnType("float");
+                    b.Property<int?>("WeightLimit")
+                        .HasColumnType("int");
 
-                    b.Property<double>("Width")
-                        .HasColumnType("float");
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -99,7 +101,7 @@ namespace Vizsgaremek.Migrations
                     b.ToTable("Shelves");
                 });
 
-            modelBuilder.Entity("Vizsgaremek.Entities.ShelfProduct", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.ShelfProductEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,11 +112,11 @@ namespace Vizsgaremek.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double?>("Height")
-                        .HasColumnType("float");
+                    b.Property<int?>("Height")
+                        .HasColumnType("int");
 
-                    b.Property<double?>("Length")
-                        .HasColumnType("float");
+                    b.Property<int?>("Length")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -128,8 +130,8 @@ namespace Vizsgaremek.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double?>("Width")
-                        .HasColumnType("float");
+                    b.Property<int?>("Weight")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -140,7 +142,7 @@ namespace Vizsgaremek.Migrations
                     b.ToTable("ShelfProducts");
                 });
 
-            modelBuilder.Entity("Vizsgaremek.Entities.Storage", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.StorageEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -170,7 +172,7 @@ namespace Vizsgaremek.Migrations
                     b.ToTable("Storages");
                 });
 
-            modelBuilder.Entity("Vizsgaremek.Entities.StorageRack", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.StorageRackEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -203,9 +205,9 @@ namespace Vizsgaremek.Migrations
                     b.ToTable("StorageRacks");
                 });
 
-            modelBuilder.Entity("Vizsgaremek.Entities.Shelf", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.ShelfEntity", b =>
                 {
-                    b.HasOne("Vizsgaremek.Entities.StorageRack", "StorageRack")
+                    b.HasOne("Vizsgaremek.Entities.StorageRackEntity", "StorageRack")
                         .WithMany("Shelves")
                         .HasForeignKey("StorageRackId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -214,15 +216,15 @@ namespace Vizsgaremek.Migrations
                     b.Navigation("StorageRack");
                 });
 
-            modelBuilder.Entity("Vizsgaremek.Entities.ShelfProduct", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.ShelfProductEntity", b =>
                 {
-                    b.HasOne("Vizsgaremek.Entities.Product", "Product")
+                    b.HasOne("Vizsgaremek.Entities.ProductEntity", "Product")
                         .WithMany("ShelfProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Vizsgaremek.Entities.Shelf", "Shelf")
+                    b.HasOne("Vizsgaremek.Entities.ShelfEntity", "Shelf")
                         .WithMany("ShelfProducts")
                         .HasForeignKey("ShelfId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -233,9 +235,9 @@ namespace Vizsgaremek.Migrations
                     b.Navigation("Shelf");
                 });
 
-            modelBuilder.Entity("Vizsgaremek.Entities.StorageRack", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.StorageRackEntity", b =>
                 {
-                    b.HasOne("Vizsgaremek.Entities.Storage", "Storage")
+                    b.HasOne("Vizsgaremek.Entities.StorageEntity", "Storage")
                         .WithMany("StorageRacks")
                         .HasForeignKey("StorageId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -244,22 +246,22 @@ namespace Vizsgaremek.Migrations
                     b.Navigation("Storage");
                 });
 
-            modelBuilder.Entity("Vizsgaremek.Entities.Product", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.ProductEntity", b =>
                 {
                     b.Navigation("ShelfProducts");
                 });
 
-            modelBuilder.Entity("Vizsgaremek.Entities.Shelf", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.ShelfEntity", b =>
                 {
                     b.Navigation("ShelfProducts");
                 });
 
-            modelBuilder.Entity("Vizsgaremek.Entities.Storage", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.StorageEntity", b =>
                 {
                     b.Navigation("StorageRacks");
                 });
 
-            modelBuilder.Entity("Vizsgaremek.Entities.StorageRack", b =>
+            modelBuilder.Entity("Vizsgaremek.Entities.StorageRackEntity", b =>
                 {
                     b.Navigation("Shelves");
                 });

@@ -16,12 +16,12 @@ public static class Config
       };
 
     public static IEnumerable<ApiScope> GetApiScopes() =>
-        new List<ApiScope> { new ApiScope("vizsgaremekAPI", "VizsgaremekIT API") };
+        new List<ApiScope> { new ApiScope("vizsgaremekAPI", "Vizsgaremek API") };
 
     public static IEnumerable<ApiResource> GetApiResources() =>
     new List<ApiResource>
     {
-        new ApiResource("vizsgaremekAPI", "VizsgaremekIT API")
+        new ApiResource("vizsgaremekAPI", "Vizsgaremek API")
         {
             Scopes = new List<string> { "vizsgaremekAPI" }
         }
@@ -57,7 +57,7 @@ public static class Config
                 ClientSecrets = { new Secret("mysecret".Sha512()) },
                 PostLogoutRedirectUris = new List<string> { "http://localhost:4200/signout-callback" },
                 RequireConsent = false,
-                AccessTokenLifetime = 600
+                AccessTokenLifetime = 3600
             },
         };
     public static List<TestUser> GetUsers() =>

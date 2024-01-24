@@ -42,6 +42,24 @@ namespace IdentityServer.Data
                             await userManager.AddToRoleAsync(newUser, "Administrator");
                         }
                     }
+
+                    if (await userManager.FindByNameAsync("Mick") == null)
+                    {
+                        var newUser = new IdentityUser()
+                        {
+                            UserName = "Mick",
+                            Email = "mick@mick.com",
+                            EmailConfirmed = false,
+                            PhoneNumber = "",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                        };
+                        var result = await userManager.CreateAsync(newUser, "MickPassword#0");
+                        if (result.Succeeded)
+                        {
+                            await userManager.AddToRoleAsync(newUser, "Member");
+                        }
+                    }
                 }
             }
 

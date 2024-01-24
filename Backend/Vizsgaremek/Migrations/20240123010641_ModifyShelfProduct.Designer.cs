@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vizsgaremek.Data;
 
@@ -11,9 +12,10 @@ using Vizsgaremek.Data;
 namespace Vizsgaremek.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240123010641_ModifyShelfProduct")]
+    partial class ModifyShelfProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,11 +38,11 @@ namespace Vizsgaremek.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("Height")
-                        .HasColumnType("float");
+                    b.Property<int?>("Height")
+                        .HasColumnType("int");
 
-                    b.Property<double?>("Length")
-                        .HasColumnType("float");
+                    b.Property<int?>("Length")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -49,11 +51,11 @@ namespace Vizsgaremek.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double?>("Weight")
-                        .HasColumnType("float");
+                    b.Property<int?>("Weight")
+                        .HasColumnType("int");
 
-                    b.Property<double?>("Width")
-                        .HasColumnType("float");
+                    b.Property<int?>("Width")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -71,11 +73,11 @@ namespace Vizsgaremek.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Height")
-                        .HasColumnType("float");
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
 
-                    b.Property<double>("Length")
-                        .HasColumnType("float");
+                    b.Property<int>("Length")
+                        .HasColumnType("int");
 
                     b.Property<int>("Level")
                         .HasColumnType("int");
@@ -86,11 +88,11 @@ namespace Vizsgaremek.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double?>("WeightLimit")
-                        .HasColumnType("float");
+                    b.Property<int?>("WeightLimit")
+                        .HasColumnType("int");
 
-                    b.Property<double>("Width")
-                        .HasColumnType("float");
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -110,11 +112,11 @@ namespace Vizsgaremek.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double?>("Height")
-                        .HasColumnType("float");
+                    b.Property<int?>("Height")
+                        .HasColumnType("int");
 
-                    b.Property<double?>("Length")
-                        .HasColumnType("float");
+                    b.Property<int?>("Length")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -128,8 +130,8 @@ namespace Vizsgaremek.Migrations
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double?>("Width")
-                        .HasColumnType("float");
+                    b.Property<int?>("Width")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
