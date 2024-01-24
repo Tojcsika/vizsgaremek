@@ -1,5 +1,5 @@
 <p-dialog
-  [header]="product.Name"
+  [header]="product.name"
   [(visible)]="visible"
   [modal]="true"
   [style]="{ width: '50vw' }"
@@ -11,27 +11,27 @@
   <div>
     <div>
       <div class="col-12 md:col-6 inline-block">Name</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText placeholder="Name" [(ngModel)]="product.Name" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText placeholder="Name" [(ngModel)]="product.name" /></div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Width</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Width" [(ngModel)]="product.Width" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Width" [(ngModel)]="product.width" /></div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Length</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Length" [(ngModel)]="product.Length" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Length" [(ngModel)]="product.length" /></div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Height</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Height" [(ngModel)]="product.Height" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Height" [(ngModel)]="product.height" /></div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Weight</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Weight" [(ngModel)]="product.Weight" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Weight" [(ngModel)]="product.weight" /></div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Description</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText placeholder="Description" [(ngModel)]="product.Description" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText placeholder="Description" [(ngModel)]="product.description" /></div>
     </div>
   </div>
   <div class="text-right">

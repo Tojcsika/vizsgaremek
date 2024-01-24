@@ -6,65 +6,33 @@ import { Constants } from '../shared/constants';
   providedIn: 'root',
 })
 export class ShelfService implements OnInit {
-  private readonly shelfUrl = Constants.apiRoot + '/shelf';
+  private readonly storageRackUrl = Constants.apiRoot + '/StorageRack';
+  private readonly shelfUrl = Constants.apiRoot + '/Shelf';
   constructor(private http: HttpClient) {}
 
   ngOnInit() {}
 
-  public getShelves(storageId: number, storageRackId: number) {
-    // this.http.get(this.shelfUrl).subscribe((storages: any) => {
-    //   return storages;
-    // });
-    if (storageId == 1 && storageRackId == 1) {
-      return [
-        {
-          Id: 1,
-          StorageRackId: 1,
-          Level: 1,
-          Width: 100,
-          Length: 200,
-          Height: 300,
-          WeightLimit: 200,
-        },
-        {
-          Id: 2,
-          StorageRackId: 1,
-          Level: 2,
-          Width: 100,
-          Length: 200,
-          Height: 450,
-          WeightLimit: 200,
-        },
-      ];
-    }
-    return [];
+  public getShelves(storageRackId: number) {
+    const url = this.storageRackUrl + `/${storageRackId}/Shelves`;
+    return this.http.get(url);
   }
 
   public getShelf(shelfId: number) {
-    if (shelfId == 1) {
-      var shelf = {
-        Id: 1,
-        StorageRackId: 1,
-        Level: 1,
-        Width: 100,
-        Length: 200,
-        Height: 300,
-        WeightLimit: 200,
-        ShelfProducts: [
-          {
-            Id: 1,
-            Name: 'Alma',
-            Weight: 0.1,
-            Quantity: 230,
-            TotalWeight: 23,
-            Width: 100,
-            Length: 100,
-            Height: 200,
-          },
-        ],
-      };
-      return shelf;
-    }
-    return {};
+    const url = this.shelfUrl + `/${shelfId}`;
+    return this.http.get(url);
+  }
+
+  public createShelf(shelf: any) {
+    return this.http.post(this.shelfUrl, shelf);
+  }
+
+  public updateShelf(shelfId: number, shelf: any) {
+    const url = this.shelfUrl + `/${shelfId}`;
+    return this.http.put(url, shelf);
+  }
+
+  public deleteShelf(shelfId: number) {
+    const url = this.shelfUrl + `/${shelfId}`;
+    return this.http.delete(url);
   }
 }

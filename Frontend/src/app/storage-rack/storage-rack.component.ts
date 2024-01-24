@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { StorageRackService } from '../services/storage-rack.service';
 import { StorageService } from '../services/storage.service';
@@ -18,6 +18,7 @@ export class StorageRackComponent implements OnInit {
   storageRackShelves: any;
   shelfEditId: any;
   editVisible: boolean = false;
+  screenWidth: number = window.innerWidth;
 
   constructor(
     private authService: AuthService,
@@ -29,23 +30,28 @@ export class StorageRackComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.storageRackId = params['storageRackId'];
-    });
 
     this.authService.isAuthenticated().then((userAuthenticated) => {
       this.userAuthenticated = userAuthenticated;
-      if (this.storageRackId != null) {
-        this.storageRack = this.storageRackService.getStorageRack(
-          this.storageRackId
-        );
-        this.storage = this.storageService.getStorage(
-          this.storageRack.StorageId
-        );
-        this.storageRackShelves = this.shelfService.getShelves(
-          this.storage.Id,
-          this.storageRackId
-        );
+      if (!userAuthenticated) {
+        this.authService.login();
+      }
+      else {
+        this.route.params.subscribe((params) => {
+          this.storageRackId = params['storageRackId'];
+        });
+
+        if (this.storageRackId != null) {
+          this.storageRackService.getStorageRack(this.storageRackId).subscribe((storageRack) => {
+            this.storageRack = storageRack;
+            this.storageService.getStorage(this.storageRack.storageId).subscribe((storage) => {
+              this.storage = storage;
+            });
+          });
+          this.shelfService.getShelves(this.storageRackId).subscribe((shelves) => {
+            this.storageRackShelves = shelves;
+          })
+        }
       }
     });
 
@@ -59,7 +65,7 @@ export class StorageRackComponent implements OnInit {
   }
 
   viewStorage() {
-    this.router.navigate(['/storage', this.storage.Id]);
+    this.router.navigate(['/storage', this.storage.id]);
   }
 
   showEditDialog(shelfId?: number) {
@@ -69,13 +75,23 @@ export class StorageRackComponent implements OnInit {
 
   editClosed() {
     this.editVisible = false;
+    this.shelfService.getShelves(this.storageRackId).subscribe((shelves) => {
+      this.storageRackShelves = shelves;
+    })
   }
 
   confirmDelete(shelfId: number) {
     if(confirm(`Are you sure to delete the Shelf?`)) {
-      // HTTP DELETE storage
-      // HA OK
-      this.storageRackShelves = this.storageRackShelves.filter(function(storageRackShelf: any) { return storageRackShelf.Id != shelfId })
+      this.shelfService.deleteShelf(shelfId).subscribe(() => {
+        this.shelfService.getShelves(this.storageRackId).subscribe((shelves) => {
+          this.storageRackShelves = shelves;
+        })
+      });
     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.screenWidth = window.innerWidth;
   }
 }

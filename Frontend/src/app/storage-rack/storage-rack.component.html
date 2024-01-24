@@ -1,6 +1,8 @@
 <div>
   <app-shelf-edit
     [shelfId]="shelfEditId"
+    [storageRackId]="storageRackId"
+    [storageId]="storage.id"
     [visible]="editVisible"
     (onClose)="editClosed()"
   ></app-shelf-edit>
@@ -9,34 +11,50 @@
       class="inline-block col-4 card-top storage-card"
       (click)="viewStorage()"
     >
-      <h3 class="mt-0" style="text-align: center">{{ storage.Name }}</h3>
-      <div class="col-12">
+      <h3 class="mt-0" style="text-align: center">{{ storage.name }}</h3>
+      <div *ngIf="screenWidth > 800" class="col-12">
         <div>
-          <div class="inline-block col-6 pb-0 pt-0">Address:</div>
-          <div class="inline-block col-6 pb-0 pt-0">{{ storage.Address }}</div>
+          <div class="inline-block col-6 pb-0 pt-0 font-bold">Address:</div>
+          <div class="inline-block col-6 pb-0 pt-0">{{ storage.address }}</div>
         </div>
         <div>
-          <div class="inline-block col-6 pb-0 pt-0">Area:</div>
-          <div class="inline-block col-6 pb-0 pt-0">{{ storage.Area }}</div>
+          <div class="inline-block col-6 pb-0 pt-0 font-bold">Area:</div>
+          <div class="inline-block col-6 pb-0 pt-0">{{ storage.area }}</div>
+        </div>
+      </div>
+      <div *ngIf="screenWidth <= 800" class="col-12">
+        <div>
+          <div class="col-12 pb-0 pt-0 font-bold">Address:</div>
+          <div class="col-12 pb-0 pt-0">{{ storage.address }}</div>
+          <div class="col-12 pb-0 pt-0 font-bold">Area:</div>
+          <div class="col-12 pb-0 pt-0">{{ storage.area }}</div>
         </div>
       </div>
     </div>
     <div class="inline-block col-4 card-top" style="vertical-align: top">
       <h3 class="mt-0" style="text-align: center">Storage Rack</h3>
-      <div>
-        <div class="inline-block col-6 pb-0 pt-0">Row:</div>
-        <div class="inline-block col-6 pb-0 pt-0">{{ storageRack.Row }}</div>
-      </div>
-      <div>
-        <div class="inline-block col-6 pb-0 pt-0">Row position:</div>
+      <div *ngIf="screenWidth > 800">
+        <div class="inline-block col-6 pb-0 pt-0 font-bold">Row:</div>
+        <div class="inline-block col-6 pb-0 pt-0">{{ storageRack.row }}</div>
+        <div class="inline-block col-6 pb-0 pt-0 font-bold">Row position:</div>
         <div class="inline-block col-6 pb-0 pt-0">
-          {{ storageRack.RowPosition }}
+          {{ storageRack.rowPosition }}
+        </div>
+        <div class="inline-block col-6 pb-0 pt-0 font-bold">Weight limit:</div>
+        <div class="inline-block col-6 pb-0 pt-0">
+          {{ storageRack.weightLimit }}
         </div>
       </div>
-      <div>
-        <div class="inline-block col-6 pb-0 pt-0">Weight limit:</div>
-        <div class="inline-block col-6 pb-0 pt-0">
-          {{ storageRack.WeightLimit }}
+      <div *ngIf="screenWidth <= 800">
+        <div class="col-12 pb-0 pt-0 font-bold">Row:</div>
+        <div class="col-12 pb-0 pt-0">{{ storageRack.row }}</div>
+        <div class="col-12 pb-0 pt-0 font-bold">Row position:</div>
+        <div class="col-12 pb-0 pt-0">
+          {{ storageRack.rowPosition }}
+        </div>
+        <div class="col-12 pb-0 pt-0 font-bold">Weight limit:</div>
+        <div class="col-12 pb-0 pt-0">
+          {{ storageRack.weightLimit }}
         </div>
       </div>
     </div>
@@ -64,6 +82,7 @@
         <th>Length</th>
         <th>Height</th>
         <th>Weight limit</th>
+        <th>Products</th>
         <th>Actions</th>
       </tr>
     </ng-template>
@@ -74,40 +93,44 @@
     >
       <tr>
         <td>
-          <span class="p-column-title">Level</span>{{ storageRackShelf.Level }}
+          <span class="p-column-title">Level</span>{{ storageRackShelf.level }}
         </td>
         <td>
-          <span class="p-column-title">Width</span>{{ storageRackShelf.Width }}
+          <span class="p-column-title">Width</span>{{ storageRackShelf.width }}
         </td>
         <td>
           <span class="p-column-title">Length</span
-          >{{ storageRackShelf.Length }}
+          >{{ storageRackShelf.length }}
         </td>
         <td>
           <span class="p-column-title">Height</span
-          >{{ storageRackShelf.Height }}
+          >{{ storageRackShelf.height }}
         </td>
         <td>
           <span class="p-column-title">Weight limit</span
-          >{{ storageRackShelf.WeightLimit }}
+          >{{ storageRackShelf.weightLimit }}
+        </td>
+        <td>
+          <span class="p-column-title">Products</span
+          >{{ storageRackShelf.totalProducts }}
         </td>
         <td>
           <p-button
             icon="pi pi-eye"
             styleClass="mr-1 p-2"
-            (onClick)="viewProducts(storageRackShelf.Id)"
+            (onClick)="viewProducts(storageRackShelf.id)"
             label="Products"
           ></p-button>
           <p-button
             icon="pi pi-pencil"
             styleClass="mr-1 p-2"
-            (onClick)="showEditDialog(storageRackShelf.Id)"
+            (onClick)="showEditDialog(storageRackShelf.id)"
             label="Edit"
           ></p-button>
           <p-button
             icon="pi pi-trash"
             styleClass="p-button-danger mr-1 p-2"
-            (onClick)="confirmDelete(storageRackShelf.Id)"
+            (onClick)="confirmDelete(storageRackShelf.id)"
             label="Delete"
           ></p-button>
         </td>

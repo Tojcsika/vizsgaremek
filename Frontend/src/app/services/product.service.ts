@@ -6,104 +6,34 @@ import { Constants } from '../shared/constants';
   providedIn: 'root',
 })
 export class ProductService implements OnInit {
-  private readonly productUrl = Constants.apiRoot + '/product';
+  private readonly productUrl = Constants.apiRoot + '/Product';
   constructor(private http: HttpClient) {}
 
   ngOnInit() {}
 
   public getProducts() {
-    return [
-      {
-        Id: 1,
-        Name: "Toy Train",
-        Width: 10,
-        Length: 20,
-        Height: 5,
-        Weight: 50,
-        Description: "Wooden train set"
-      },
-      {
-        Id: 2,
-        Name: "Doll",
-        Width: 8,
-        Length: 15,
-        Height: 12,
-        Weight: 30,
-        Description: "Classic doll"
-      },
-      {
-        Id: 3,
-        Name: "Teddy Bear",
-        Width: 12,
-        Length: 10,
-        Height: 8,
-        Weight: 20,
-        Description: "Soft and cuddly bear"
-      }
-    ]
+    return this.http.get(this.productUrl);
   }
 
   public getProduct(productId: number){
-    var product: any = {};
-    if (productId == 1){
-      product = {
-        Id: 1,
-        Name: "Toy Train",
-        Width: 10,
-        Length: 20,
-        Height: 5,
-        Weight: 50,
-        Description: "Wooden train set"
-      };
-    }
-    else if (productId == 2) {
-      product = {
-        Id: 2,
-        Name: "Doll",
-        Width: 8,
-        Length: 15,
-        Height: 12,
-        Weight: 30,
-        Description: "Classic doll"
-      }
-    }
-    else if (productId == 3) {
-      product = {
-        Id: 3,
-        Name: "Teddy Bear",
-        Width: 12,
-        Length: 10,
-        Height: 8,
-        Weight: 20,
-        Description: "Soft and cuddly bear"
-      }
-    }
-    return product;
+    return this.http.get(this.productUrl + `/${productId}`);
   }
 
   public searchProduct(searchString: string) {
-    // this.http.get(this.shelfUrl).subscribe((storages: any) => {
-    //   return storages;
-    // });
-    return [
-      {
-        Id: 1,
-        Name: "Toy Train",
-        Width: 10,
-        Length: 20,
-        Height: 5,
-        Weight: 50,
-        Description: "Wooden train set"
-      },
-      {
-        Id: 3,
-        Name: "Teddy Bear",
-        Width: 12,
-        Length: 10,
-        Height: 8,
-        Weight: 20,
-        Description: "Soft and cuddly bear"
-      }
-    ]
+    return this.http.get(this.productUrl + `/Search?searchString=${searchString}`);
+  }
+
+  public createProduct(product: any) {
+    return this.http.post(this.productUrl, product);
+  }
+
+  public updateProduct(productId: number, product: any) {
+    const url = this.productUrl + `/${productId}`;
+    return this.http.put(url, product);
+  }
+
+  public deleteProduct(productId: number) {
+    const url = this.productUrl + `/${productId}`;
+    return this.http.delete(url);
   }
 }

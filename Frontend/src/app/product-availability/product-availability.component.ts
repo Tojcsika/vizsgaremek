@@ -24,16 +24,24 @@ export class ProductAvailabilityComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.productId = params['productId'];
-    });
 
     this.authService.isAuthenticated().then((userAuthenticated) => {
       this.userAuthenticated = userAuthenticated;
-      if (this.productId != null) {
-        this.productAvailabilities = this.shelfProductService.getProductShelves(this.productId);
-        this.product = this.productService.getProduct(this.productId);
-
+      if (!userAuthenticated) {
+        this.authService.login();
+      }
+      else {
+        this.route.params.subscribe((params) => {
+          this.productId = params['productId'];
+        });
+        if (this.productId != null) {
+          this.shelfProductService.getProductShelves(this.productId).subscribe((productAvailabilities) => {
+            this.productAvailabilities = productAvailabilities;
+          });
+          this.productService.getProduct(this.productId).subscribe((product) => {
+            this.product = product;
+          });
+        }
       }
     });
 

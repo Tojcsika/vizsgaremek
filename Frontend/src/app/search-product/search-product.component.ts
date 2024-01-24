@@ -24,7 +24,14 @@ export class SearchProductComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isAuthenticated().then((userAuthenticated) => {
       this.userAuthenticated = userAuthenticated;
-      this.products = this.productService.getProducts();
+      if (!userAuthenticated) {
+        this.authService.login();
+      }
+      else {
+        this.productService.getProducts().subscribe((products) => {
+          this.products = products;
+        });
+      }
     });
 
     this.authService.loginChanged.subscribe((userAuthenticated) => {
@@ -37,6 +44,15 @@ export class SearchProductComponent implements OnInit {
   }
 
   searchProduct(searchString: string) {
-    this.products = this.productService.searchProduct(searchString);
+    if (searchString == "") {
+      this.productService.getProducts().subscribe((products) => {
+        this.products = products;
+      });
+      return;
+    }
+
+    this.productService.searchProduct(searchString).subscribe((products) => {
+      this.products = products;
+    });
   }
 }

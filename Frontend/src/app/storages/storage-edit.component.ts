@@ -38,13 +38,15 @@ export class StorageEditComponent implements OnInit {
 
   onShow() {
     if (this.storageId != null) {
-      this.storage = this.storageService.getStorage(this.storageId);
+      this.storageService.getStorage(this.storageId).subscribe((storage) => {
+        this.storage = storage;
+      });
     }
     else{
       this.storage = {
-        Name: "",
-        Address: "",
-        Area: null
+        name: "",
+        address: "",
+        area: null
       }
     }
   }
@@ -54,7 +56,12 @@ export class StorageEditComponent implements OnInit {
   }
 
   saveStorage() {
-    // HTTP POST mentéshez
+    if (this.storageId != null) {
+      this.storageService.updateStorage(this.storageId, this.storage).subscribe();
+    }
+    else{
+      this.storageService.createStorage(this.storage).subscribe();
+    }
     this.visible = false;
   }
 }

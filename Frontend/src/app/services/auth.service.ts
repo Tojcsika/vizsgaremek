@@ -58,6 +58,8 @@ export class AuthService {
       localStorage.setItem('id_token', user.access_token);
       this.loginChangedSubject.next(this.checkUser(user));
       return user;
+    }).catch((err) => {
+      return err;
     });
   };
 

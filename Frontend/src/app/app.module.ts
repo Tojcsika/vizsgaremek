@@ -6,7 +6,6 @@ import { RouterModule, provideRouter } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HeaderComponent } from './header/header.component';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
@@ -40,7 +39,6 @@ import { ProductAvailabilityComponent } from './product-availability/product-ava
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     UnauthorizedComponent,
     SigninRedirectCallbackComponent,
     ProductsComponent,
@@ -73,7 +71,7 @@ import { ProductAvailabilityComponent } from './product-availability/product-ava
     DialogModule,
     DropdownModule,
     RouterModule.forRoot([
-      { path: 'storages', component: StoragesComponent, pathMatch: 'full' },
+      { path: 'storages', component: StoragesComponent },
       {
         path: 'storage/:storageId',
         component: StorageComponent,

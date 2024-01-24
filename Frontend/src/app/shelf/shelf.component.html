@@ -1,6 +1,7 @@
 <div>
   <app-shelf-product-edit
     [shelfProductId]="shelfProductEditId"
+    [shelfId]="shelfId"
     [visible]="editVisible"
     (onClose)="editClosed()"
   ></app-shelf-product-edit>
@@ -9,15 +10,23 @@
       class="inline-block col-4 card-top storage-card"
       (click)="viewStorage()"
     >
-      <h3 class="mt-0" style="text-align: center">{{ storage.Name }}</h3>
-      <div class="col-12">
+      <h3 class="mt-0" style="text-align: center">{{ storage.name }}</h3>
+      <div *ngIf="screenWidth > 800" class="col-12">
         <div>
-          <div class="inline-block col-6 pb-0 pt-0">Address:</div>
-          <div class="inline-block col-6 pb-0 pt-0">{{ storage.Address }}</div>
+          <div class="inline-block col-6 pb-0 pt-0 font-bold">Address:</div>
+          <div class="inline-block col-6 pb-0 pt-0">{{ storage.address }}</div>
         </div>
         <div>
-          <div class="inline-block col-6 pb-0 pt-0">Area:</div>
-          <div class="inline-block col-6 pb-0 pt-0">{{ storage.Area }}</div>
+          <div class="inline-block col-6 pb-0 pt-0 font-bold">Area:</div>
+          <div class="inline-block col-6 pb-0 pt-0">{{ storage.area }}</div>
+        </div>
+      </div>
+      <div *ngIf="screenWidth <= 800" class="col-12">
+        <div>
+          <div class="col-12 pb-0 pt-0 font-bold">Address:</div>
+          <div class="col-12 pb-0 pt-0">{{ storage.address }}</div>
+          <div class="col-12 pb-0 pt-0 font-bold">Area:</div>
+          <div class="col-12 pb-0 pt-0">{{ storage.area }}</div>
         </div>
       </div>
     </div>
@@ -26,54 +35,70 @@
       style="vertical-align: top"
       (click)="viewStorageRack()"
     >
-      <h3 class="mt-0" style="text-align: center">Storage Rack</h3>
-      <div>
-        <div class="inline-block col-6 pb-0 pt-0">Row:</div>
-        <div class="inline-block col-6 pb-0 pt-0">{{ storageRack.Row }}</div>
+    <h3 class="mt-0" style="text-align: center">Storage Rack</h3>
+    <div *ngIf="screenWidth > 800">
+      <div class="inline-block col-6 pb-0 pt-0 font-bold">Row:</div>
+      <div class="inline-block col-6 pb-0 pt-0">{{ storageRack.row }}</div>
+      <div class="inline-block col-6 pb-0 pt-0 font-bold">Row position:</div>
+      <div class="inline-block col-6 pb-0 pt-0">
+        {{ storageRack.rowPosition }}
       </div>
-      <div>
-        <div class="inline-block col-6 pb-0 pt-0">Row position:</div>
-        <div class="inline-block col-6 pb-0 pt-0">
-          {{ storageRack.RowPosition }}
-        </div>
+      <div class="inline-block col-6 pb-0 pt-0 font-bold">Weight limit:</div>
+      <div class="inline-block col-6 pb-0 pt-0">
+        {{ storageRack.weightLimit }}
       </div>
-      <div>
-        <div class="inline-block col-6 pb-0 pt-0">Weight limit:</div>
-        <div class="inline-block col-6 pb-0 pt-0">
-          {{ storageRack.WeightLimit }}
-        </div>
+    </div>
+    <div *ngIf="screenWidth <= 800">
+      <div class="col-12 pb-0 pt-0 font-bold">Row:</div>
+      <div class="col-12 pb-0 pt-0">{{ storageRack.row }}</div>
+      <div class="col-12 pb-0 pt-0 font-bold">Row position:</div>
+      <div class="col-12 pb-0 pt-0">
+        {{ storageRack.rowPosition }}
       </div>
+      <div class="col-12 pb-0 pt-0 font-bold">Weight limit:</div>
+      <div class="col-12 pb-0 pt-0">
+        {{ storageRack.weightLimit }}
+      </div>
+    </div>
     </div>
     <div class="inline-block col-4 card-top" style="vertical-align: top">
       <h3 class="mt-0" style="text-align: center">Shelf</h3>
-      <div>
-        <div class="inline-block col-3 pb-0 pt-0">Level:</div>
-        <div class="inline-block col-3 pb-0 pt-0">{{ shelf.Level }}</div>
-        <div class="inline-block col-3 pb-0 pt-0">Width:</div>
+      <div *ngIf="screenWidth > 800">
+        <div class="inline-block col-3 pb-0 pt-0 font-bold">Level:</div>
+        <div class="inline-block col-3 pb-0 pt-0">{{ shelf.level }}</div>
+        <div class="inline-block col-3 pb-0 pt-0 font-bold">Width:</div>
         <div class="inline-block col-3 pb-0 pt-0">
-          {{ shelf.Width }}
+          {{ shelf.width }}
+        </div>
+        <div class="inline-block col-3 pb-0 pt-0 font-bold">Length:</div>
+        <div class="inline-block col-3 pb-0 pt-0">
+          {{ shelf.width }}
+        </div>
+        <div class="inline-block col-3 pb-0 pt-0 font-bold">Height:</div>
+        <div class="inline-block col-3 pb-0 pt-0">
+          {{ shelf.height }}
+        </div>
+        <div class="inline-block col-3 pb-0 pt-0 font-bold">Weight limit:</div>
+        <div class="inline-block col-3 pb-0 pt-0">
+          {{ shelf.weightLimit }}
         </div>
       </div>
-      <div>
-        <div class="inline-block col-3 pb-0 pt-0">Length:</div>
-        <div class="inline-block col-3 pb-0 pt-0">
-          {{ shelf.Width }}
-        </div>
-        <div class="inline-block col-3 pb-0 pt-0">Height:</div>
-        <div class="inline-block col-3 pb-0 pt-0">
-          {{ shelf.Height }}
-        </div>
-      </div>
-      <div>
-        <div class="inline-block col-3 pb-0 pt-0">Weight limit:</div>
-        <div class="inline-block col-3 pb-0 pt-0">
-          {{ shelf.WeightLimit }}
-        </div>
+      <div *ngIf="screenWidth <= 800">
+        <div class="col-12 pb-0 pt-0 font-bold">Level:</div>
+        <div class="col-12 pb-0 pt-0">{{ shelf.level }}</div>
+        <div class="col-12 pb-0 pt-0 font-bold">Width:</div>
+        <div class="col-12 pb-0 pt-0">{{ shelf.width }}</div>
+        <div class="col-12 pb-0 pt-0 font-bold">Length:</div>
+        <div class="col-12 pb-0 pt-0">{{ shelf.width }}</div>
+        <div class="col-12 pb-0 pt-0 font-bold">Height:</div>
+        <div class="col-12 pb-0 pt-0">{{ shelf.height }}</div>
+        <div class="col-12 pb-0 pt-0 font-bold">Weight limit:</div>
+        <div class="col-12 pb-0 pt-0">{{ shelf.weightLimit }}</div>
       </div>
     </div>
   </p-card>
   <p-table
-    [value]="shelf.ShelfProducts"
+    [value]="shelf.shelfProducts"
     responsiveLayout="stack"
     [breakpoint]="'960px'"
     [tableStyle]="{ 'min-width': '20rem' }"
@@ -103,39 +128,38 @@
     </ng-template>
     <ng-template pTemplate="body" let-shelfProduct let-shelfProducts="columns">
       <tr>
-        <td><span class="p-column-title">Name</span>{{ shelfProduct.Name }}</td>
+        <td><span class="p-column-title">Name</span>{{ shelfProduct.name }}</td>
         <td>
-          <span class="p-column-title">Weight</span>{{ shelfProduct.Weight }}
+          <span class="p-column-title">Weight</span>{{ shelfProduct.weight }}
         </td>
         <td>
           <span class="p-column-title">Quantity</span
-          >{{ shelfProduct.Quantity }}
+          >{{ shelfProduct.quantity }}
         </td>
         <td>
           <span class="p-column-title">Total weight</span
-          >{{ shelfProduct.TotalWeight }}
+          >{{ shelfProduct.totalWeight }}
         </td>
         <td>
-          <span class="p-column-title">Width</span>{{ shelfProduct.Width }}
+          <span class="p-column-title">Width</span>{{ shelfProduct.width }}
         </td>
         <td>
-          <span class="p-column-title">Length</span>{{ shelfProduct.Length }}
+          <span class="p-column-title">Length</span>{{ shelfProduct.length }}
         </td>
         <td>
-          <span class="p-column-title">Height</span>{{ shelfProduct.Height }}
+          <span class="p-column-title">Height</span>{{ shelfProduct.height }}
         </td>
         <td>
-          <span class="p-column-title">Actions</span>
           <p-button
             icon="pi pi-pencil"
             styleClass="mr-1 p-2"
-            (onClick)="showEditDialog(shelfProduct.Id)"
+            (onClick)="showEditDialog(shelfProduct.id)"
             label="Edit"
           ></p-button>
           <p-button
             icon="pi pi-trash"
             styleClass="p-button-danger mr-1 p-2"
-            (onClick)="confirmDelete(shelfProduct.Id)"
+            (onClick)="confirmDelete(shelfProduct.id)"
             label="Delete"
           ></p-button>
         </td>

@@ -6,50 +6,32 @@ import { Constants } from '../shared/constants';
   providedIn: 'root',
 })
 export class StorageRackService implements OnInit {
-  private readonly storageRackUrl = Constants.apiRoot + '/storageRack';
+  private readonly storageRackUrl = Constants.apiRoot + '/StorageRack';
+  private readonly storageUrl = Constants.apiRoot + '/Storage';
   constructor(private http: HttpClient) {}
 
   ngOnInit() {}
 
   public getStorageRacks(storageId: number) {
-    // this.http.get(this.storageRackUrl).subscribe((storages: any) => {
-    //   return storages;
-    // });
-    if (storageId == 1) {
-      return [
-        {
-          Id: 1,
-          StorageId: 1,
-          Row: 1,
-          RowPosition: 1,
-          WeightLimit: 1200,
-        },
-        {
-          Id: 2,
-          StorageId: 1,
-          Row: 1,
-          RowPosition: 2,
-          WeightLimit: 1300,
-        },
-      ];
-    }
-    return [];
+    const url = this.storageUrl + `/${storageId}/StorageRacks`;
+    return this.http.get(url);
   }
 
   public getStorageRack(storageRackId: number) {
-    // this.http.get(this.storageRackUrl).subscribe((storages: any) => {
-    //   return storages;
-    // });
-    if (storageRackId == 1) {
-      var storageRack = {
-        Id: 1,
-        StorageId: 1,
-        Row: 1,
-        RowPosition: 1,
-        WeightLimit: 1200,
-      };
-      return storageRack;
-    }
-    return {};
+    return this.http.get(this.storageRackUrl + `/${storageRackId}`);
+  }
+
+  public createStorageRack(storageRack: any) {
+    return this.http.post(this.storageRackUrl, storageRack);
+  }
+
+  public updateStorageRack(storageRackId: number, storageRack: any) {
+    const url = this.storageRackUrl + `/${storageRackId}`;
+    return this.http.put(url, storageRack);
+  }
+
+  public deleteStorageRack(storageRackId: number) {
+    const url = this.storageRackUrl + `/${storageRackId}`;
+    return this.http.delete(url);
   }
 }

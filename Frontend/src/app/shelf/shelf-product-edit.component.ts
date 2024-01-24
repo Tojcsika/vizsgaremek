@@ -16,12 +16,13 @@ import { ProductService } from '../services/product.service';
 })
 export class ShelfProductEditComponent implements OnInit {
   @Input() shelfProductId?: number;
+  @Input() shelfId!: number;
   @Input() visible!: boolean;
   @Output() onClose = new EventEmitter();
 
   public userAuthenticated = false;
   shelfProduct: any = {};
-  selectedProduct: any = null;
+  selectedProduct: any = {};
   products: any = [];
 
   constructor(
@@ -42,10 +43,27 @@ export class ShelfProductEditComponent implements OnInit {
 
   onShow() {
     if (this.shelfProductId != null) {
-      this.shelfProduct = this.shelfProductService.getShelfProduct(this.shelfProductId);
+      this.shelfProductService.getShelfProduct(this.shelfProductId).subscribe((shelfProduct) => {
+        this.shelfProduct = shelfProduct;
+        this.shelfProduct.shelfId = this.shelfId;
+      });
     }
-    else{
-      this.products = this.productService.getProducts();
+    else {
+      this.productService.getProducts().subscribe((products) => {
+        this.products = products;
+      });
+      this.shelfProduct = {
+        height: null,
+        id: 0,
+        length: null,
+        name: "",
+        productId: null,
+        quantity: null,
+        totalWeight: null,
+        weight: null,
+        width: null,
+        shelfId: this.shelfId,
+      }
     }
   }
 
@@ -54,17 +72,22 @@ export class ShelfProductEditComponent implements OnInit {
   }
 
   saveShelfProduct() {
-    // HTTP POST mentéshez
+    if (this.shelfProductId != null) {
+      this.shelfProductService.updateShelfProduct(this.shelfProductId, this.shelfProduct).subscribe();
+    } else {
+      this.shelfProductService.createShelfProduct(this.shelfProduct).subscribe();
+    }
     this.visible = false;
   }
 
   updateTotalWeight() {
-    this.shelfProduct.TotalWeight = this.shelfProduct.ShelfProductQuantity * this.shelfProduct.ProductWeight;
+    this.shelfProduct.totalWeight = this.shelfProduct.quantity * this.shelfProduct.weight;
   }
 
   productSelected(selectedEvent: any) {
-    this.shelfProduct.ProductName = selectedEvent.value.Name;
-    this.shelfProduct.ProductWeight = selectedEvent.value.Weight;
-    this.shelfProduct.ProductId = selectedEvent.value.Id;
+    this.shelfProduct.name = selectedEvent.value.name;
+    this.shelfProduct.weight = selectedEvent.value.weight;
+    this.shelfProduct.productId = selectedEvent.value.id;
+    this.shelfProduct.shelfId = this.shelfId;
   }
 }

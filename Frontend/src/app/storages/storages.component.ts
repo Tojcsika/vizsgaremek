@@ -23,7 +23,14 @@ export class StoragesComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isAuthenticated().then((userAuthenticated) => {
       this.userAuthenticated = userAuthenticated;
-      this.storages = this.storageService.getStorages();
+      if (!userAuthenticated) {
+        this.authService.login();
+      }
+      else {
+        this.storageService.getStorages().subscribe((storages) => {
+          this.storages = storages;
+        });
+      }
     });
 
     this.authService.loginChanged.subscribe((userAuthenticated) => {
@@ -42,13 +49,18 @@ export class StoragesComponent implements OnInit {
 
   editClosed() {
     this.editVisible = false;
+    this.storageService.getStorages().subscribe((storages) => {
+      this.storages = storages;
+    })
   }
 
   confirmDelete(storageId: number, storageName: string) {
     if(confirm(`Are you sure to delete ${storageName}?`)) {
-      // HTTP DELETE storage
-      // HA OK
-      this.storages = this.storages.filter(function(storage: any) { return storage.Id != storageId })
+      this.storageService.deleteStorage(storageId).subscribe(() => {
+        this.storageService.getStorages().subscribe((storages) => {
+          this.storages = storages;
+        })
+      });
     }
   }
 }

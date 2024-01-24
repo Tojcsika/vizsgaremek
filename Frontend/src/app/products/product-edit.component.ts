@@ -38,10 +38,13 @@ export class ProductEditComponent implements OnInit {
 
   onShow() {
     if (this.productId != null) {
-      this.product = this.productService.getProduct(this.productId);
+      this.productService.getProduct(this.productId).subscribe((product) => {
+        this.product = product;
+      });
     }
     else{
       this.product = {
+        Id: 0,
         Name: "",
         Width: null,
         Length: null,
@@ -57,7 +60,11 @@ export class ProductEditComponent implements OnInit {
   }
 
   saveProduct() {
-    // HTTP POST mentéshez
+    if (this.productId != null) {
+      this.productService.updateProduct(this.productId, this.product).subscribe();
+    } else {
+      this.productService.createProduct(this.product).subscribe();
+    }
     this.visible = false;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { StorageRackService } from '../services/storage-rack.service';
 import { StorageService } from '../services/storage.service';
@@ -16,6 +16,7 @@ export class StorageComponent implements OnInit {
   storageRackEditId: any;
   storage: any = {};
   editVisible: boolean = false;
+  screenWidth: number = window.innerWidth;
 
   constructor(
     private authService: AuthService,
@@ -26,14 +27,23 @@ export class StorageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.storageId = params['storageId'];
-    });
-
     this.authService.isAuthenticated().then((userAuthenticated) => {
       this.userAuthenticated = userAuthenticated;
-      this.storageRacks = this.storageRackService.getStorageRacks(1);
-      this.storage = this.storageService.getStorage(this.storageId);
+      if (!userAuthenticated) {
+        this.authService.login();
+      }
+      else {
+        this.route.params.subscribe((params) => {
+          this.storageId = params['storageId'];
+        });
+
+        this.storageRackService.getStorageRacks(this.storageId).subscribe((storageRacks) => {
+          this.storageRacks = storageRacks;
+        });
+        this.storageService.getStorage(this.storageId).subscribe((storage) => {
+          this.storage = storage;
+        });
+      }
     });
 
     this.authService.loginChanged.subscribe((userAuthenticated) => {
@@ -52,13 +62,23 @@ export class StorageComponent implements OnInit {
 
   editClosed() {
     this.editVisible = false;
+    this.storageRackService.getStorageRacks(this.storageId).subscribe((storageRacks) => {
+      this.storageRacks = storageRacks;
+    })
   }
 
   confirmDelete(storageRackId: number) {
     if(confirm(`Are you sure to delete the Storage Rack?`)) {
-      // HTTP DELETE storage
-      // HA OK
-      this.storageRacks = this.storageRacks.filter(function(storageRack: any) { return storageRack.Id != storageRackId })
+      this.storageRackService.deleteStorageRack(storageRackId).subscribe(() => {
+        this.storageRackService.getStorageRacks(this.storageId).subscribe((storageRacks) => {
+          this.storageRacks = storageRacks;
+        })
+      });
     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.screenWidth = window.innerWidth;
   }
 }

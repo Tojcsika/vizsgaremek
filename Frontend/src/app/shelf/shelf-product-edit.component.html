@@ -12,43 +12,42 @@
     <div *ngIf="shelfProductId == null">
       <div class="col-12 md:col-6 inline-block">Product</div>
       <div class="col-12 md:col-6 inline-block">
-        <p-dropdown 
+        <p-dropdown
         styleClass="w-full p-1"
-        [options]="products" 
-        [(ngModel)]="shelfProduct"
+        [options]="products"
         (onChange)="productSelected($event)"
-        optionLabel="Name"
+        optionLabel="name"
         placeholder="Select a Product">
         </p-dropdown>
       </div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Name</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText disabled placeholder="Name" [(ngModel)]="shelfProduct.ProductName" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText disabled placeholder="Name" [(ngModel)]="shelfProduct.name" /></div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Product weight</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText disabled pKeyFilter="num" placeholder="Product weight" [(ngModel)]="shelfProduct.ProductWeight" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText disabled pKeyFilter="num" placeholder="Product weight" [(ngModel)]="shelfProduct.weight" /></div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Quantity</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Quantity" [(ngModel)]="shelfProduct.ShelfProductQuantity" (ngModelChange)="updateTotalWeight()" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Quantity" [(ngModel)]="shelfProduct.quantity" (ngModelChange)="updateTotalWeight()" /></div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Total weight</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText disabled pKeyFilter="num" placeholder="Total weight" [(ngModel)]="shelfProduct.TotalWeight" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText disabled pKeyFilter="num" placeholder="Total weight" [(ngModel)]="shelfProduct.totalWeight" /></div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Width</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Width" [(ngModel)]="shelfProduct.ShelfProductWidth" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Width" [(ngModel)]="shelfProduct.width" /></div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Length</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Length" [(ngModel)]="shelfProduct.ShelfProductLength" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Length" [(ngModel)]="shelfProduct.length" /></div>
     </div>
     <div>
       <div class="col-12 md:col-6 inline-block">Height</div>
-      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Height" [(ngModel)]="shelfProduct.ShelfProductHeight" /></div>
+      <div class="col-12 md:col-6 inline-block"><input class="col-12" pInputText pKeyFilter="num" placeholder="Height" [(ngModel)]="shelfProduct.height" /></div>
     </div>
   </div>
   <div class="text-right">

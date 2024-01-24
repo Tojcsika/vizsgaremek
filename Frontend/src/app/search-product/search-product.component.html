@@ -25,26 +25,26 @@
     <ng-template pTemplate="body" let-product let-products="columns">
       <tr>
         <td>
-          <span class="p-column-title">Name</span>{{ product.Name }}
+          <span class="p-column-title">Name</span>{{ product.name }}
         </td>
         <td>
-          <span class="p-column-title">Width</span>{{ product.Width }}
+          <span class="p-column-title">Width</span>{{ product.width }}
         </td>
         <td>
-          <span class="p-column-title">Length</span>{{ product.Length }}
+          <span class="p-column-title">Length</span>{{ product.length }}
         </td>
         <td>
-          <span class="p-column-title">Height</span>{{ product.Height }}
+          <span class="p-column-title">Height</span>{{ product.height }}
         </td>
         <td>
-          <span class="p-column-title">Weight</span>{{ product.Weight }}
+          <span class="p-column-title">Weight</span>{{ product.weight }}
         </td>
         <td>
-          <span class="p-column-title">Description</span>{{ product.Description }}</td>
+          <span class="p-column-title">Description</span>{{ product.description }}</td>
         <td>
           <p-button
             icon="pi pi-eye"
-            (onClick)="viewProductAvailability(product.Id)"
+            (onClick)="viewProductAvailability(product.id)"
             styleClass="mr-1 p-2 mb-2"
             label="View product availability"
           ></p-button>

@@ -23,7 +23,14 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isAuthenticated().then((userAuthenticated) => {
       this.userAuthenticated = userAuthenticated;
-      this.products = this.productService.getProducts();
+      if (!userAuthenticated) {
+        this.authService.login();
+      }
+      else {
+        this.productService.getProducts().subscribe((products) => {
+          this.products = products;
+        });
+      }
     });
 
     this.authService.loginChanged.subscribe((userAuthenticated) => {
@@ -42,13 +49,18 @@ export class ProductsComponent implements OnInit {
 
   editClosed() {
     this.editVisible = false;
+    this.productService.getProducts().subscribe((products) => {
+      this.products = products;
+    });
   }
 
   confirmDelete(productId: number, productName: string) {
     if(confirm(`Are you sure to delete ${productName}?`)) {
-      // HTTP DELETE storage
-      // HA OK
-      this.products = this.products.filter(function(product: any) { return product.Id != productId })
+      this.productService.deleteProduct(productId).subscribe(() => {
+        this.productService.getProducts().subscribe((products) => {
+          this.products = products;
+        })
+      });
     }
   }
 }

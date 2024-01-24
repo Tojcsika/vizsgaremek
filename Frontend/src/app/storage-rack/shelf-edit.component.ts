@@ -15,6 +15,8 @@ import { ShelfService } from '../services/shelf.service';
 })
 export class ShelfEditComponent implements OnInit {
   @Input() shelfId?: number;
+  @Input() storageRackId!: number;
+  @Input() storageId!: number;
   @Input() visible!: boolean;
   @Output() onClose = new EventEmitter();
 
@@ -38,15 +40,21 @@ export class ShelfEditComponent implements OnInit {
 
   onShow() {
     if (this.shelfId != null) {
-      this.shelf = this.shelfService.getShelf(this.shelfId);
+      this.shelfService.getShelf(this.shelfId).subscribe((shelf) => {
+        this.shelf = shelf;
+        this.shelf.storageRackId = this.storageRackId;
+        this.shelf.storageId = this.storageId;
+      })
     }
     else{
       this.shelf = {
-        Level: null,
-        Width: null,
-        Length: null,
-        Height: null,
-        WeightLimit: null,
+        level: null,
+        width: null,
+        length: null,
+        height: null,
+        weightLimit: null,
+        storageRackId: this.storageRackId,
+        storageId: this.storageId
       }
     }
   }
@@ -56,7 +64,12 @@ export class ShelfEditComponent implements OnInit {
   }
 
   saveShelf() {
-    // HTTP POST mentéshez
+    if (this.shelfId != null) {
+      this.shelfService.updateShelf(this.shelfId, this.shelf).subscribe();
+    }
+    else{
+      this.shelfService.createShelf(this.shelf).subscribe();
+    }
     this.visible = false;
   }
 }

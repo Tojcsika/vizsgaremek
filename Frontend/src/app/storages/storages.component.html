@@ -30,28 +30,28 @@
     </ng-template>
     <ng-template pTemplate="body" let-storage let-storages="columns">
       <tr>
-        <td><span class="p-column-title">Name</span>{{ storage.Name }}</td>
+        <td><span class="p-column-title">Name</span>{{ storage.name }}</td>
         <td>
-          <span class="p-column-title">Address</span>{{ storage.Address }}
+          <span class="p-column-title">Address</span>{{ storage.address }}
         </td>
-        <td><span class="p-column-title">Area</span>{{ storage.Area }}</td>
+        <td><span class="p-column-title">Area</span>{{ storage.area }}</td>
         <td>
           <p-button
             icon="pi pi-eye"
             styleClass="mr-1 p-2 mb-2"
             label="Storage racks"
-            (onClick)="viewStorage(storage.Id)"
+            (onClick)="viewStorage(storage.id)"
           ></p-button>
           <p-button
             icon="pi pi-pencil"
-            (onClick)="showEditDialog(storage.Id)"
+            (onClick)="showEditDialog(storage.id)"
             styleClass="mr-1 p-2 mb-2"
             label="Edit"
           ></p-button>
           <p-button
             icon="pi pi-trash"
             styleClass="p-button-danger mr-1 p-2 mb-2"
-            (onClick)="confirmDelete(storage.Id, storage.Name)"
+            (onClick)="confirmDelete(storage.id, storage.name)"
             label="Delete"
           ></p-button>
         </td>

@@ -11,7 +11,7 @@ export class SignoutRedirectCallbackComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.finishLogout().then(() => {
-      this.router.navigate(['/builder'], { replaceUrl: true });
+      this.authService.login();
     });
   }
 }

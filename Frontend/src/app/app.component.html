@@ -1,38 +1,25 @@
 <div>
   <p-toolbar>
-    <!-- <p-button (click)="sidebarVisible = true" icon="pi pi-bars"></p-button> -->
     <span class="font-bold">Santa's Storage</span>
     <span></span>
-    <!--<p-button
-        class=""
-        label="Dashboard"
-        icon="pi pi-home"
-        (click)="dashboard()"
-        styleClass="p-button-sm"
-      ></p-button>
-      <span class="spacer"></span>
-      <span *ngIf="userAuthenticated"
-        >Logged in as: <span class="font-bold">{{ getUserName() }}</span>
+    <div *ngIf="userAuthenticated">
+      <span class="mr-2"
+      >Logged in as: <span class="font-bold">{{ getUserName() }}</span>
       </span>
-      <p-button
-        class=""
-        *ngIf="!userAuthenticated"
-        label="Login"
-        (click)="login()"
-        styleClass="p-button-sm"
-      ></p-button>
-      <p-button
-        class=""
-        *ngIf="userAuthenticated"
-        label="Logout"
-        (click)="logout()"
-        styleClass="p-button-sm"
-      ></p-button>
-      -->
+      <span>
+        <p-button
+          class=""
+          label="Logout"
+          (click)="logout()"
+          styleClass="p-button-sm"
+        ></p-button>
+      </span>
+    </div>
   </p-toolbar>
   <div style="display: flex">
     <div class="col-2 inline-block bg-white" style="height: 95vh">
       <p-button
+        *ngIf="screenWidth > 800"
         class="button-label"
         label="Storages"
         icon="pi pi-home"
@@ -40,6 +27,15 @@
         styleClass="col-12 mb-1"
       ></p-button>
       <p-button
+        *ngIf="screenWidth <= 800"
+        class="button-label"
+        label=""
+        icon="pi pi-home"
+        (click)="storages()"
+        styleClass="col-12 mb-1 w-full"
+      ></p-button>
+      <p-button
+        *ngIf="screenWidth > 800"
         class="button-label"
         label="Products"
         icon="pi pi-box"
@@ -47,11 +43,28 @@
         styleClass="col-12 mb-1"
       ></p-button>
       <p-button
+        *ngIf="screenWidth <= 800"
+        class="button-label"
+        label=""
+        icon="pi pi-box"
+        (click)="products()"
+        styleClass="col-12 mb-1 w-full"
+      ></p-button>
+      <p-button
+        *ngIf="screenWidth > 800"
         class="button-label"
         label="Search product"
         icon="pi pi-search"
         (click)="searchProduct()"
         styleClass="col-12 mb-1"
+      ></p-button>
+      <p-button
+        *ngIf="screenWidth <= 800"
+        class="button-label"
+        label=""
+        icon="pi pi-search"
+        (click)="searchProduct()"
+        styleClass="col-12 mb-1 w-full"
       ></p-button>
     </div>
     <div class="col-10 inline-block">

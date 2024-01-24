@@ -15,6 +15,7 @@ import { StorageRackService } from '../services/storage-rack.service';
 })
 export class StorageRackEditComponent implements OnInit {
   @Input() storageRackId?: number;
+  @Input() storageId!: number;
   @Input() visible!: boolean;
   @Output() onClose = new EventEmitter();
 
@@ -38,13 +39,17 @@ export class StorageRackEditComponent implements OnInit {
 
   onShow() {
     if (this.storageRackId != null) {
-      this.storageRack = this.storageRackService.getStorageRack(this.storageRackId);
+      this.storageRackService.getStorageRack(this.storageRackId).subscribe((storageRack) => {
+        this.storageRack = storageRack;
+        this.storageRack.storageId = this.storageId;
+      });
     }
     else{
       this.storageRack = {
-        Row: null,
-        RowPosition: null,
-        WeightLimit: null,
+        row: null,
+        rowPosition: null,
+        weightLimit: null,
+        storageId: this.storageId
       }
     }
   }
@@ -54,7 +59,11 @@ export class StorageRackEditComponent implements OnInit {
   }
 
   saveStorageRack() {
-    // HTTP POST mentéshez
+    if (this.storageRackId != null) {
+      this.storageRackService.updateStorageRack(this.storageRackId, this.storageRack).subscribe();
+    } else {
+      this.storageRackService.createStorageRack(this.storageRack).subscribe();
+    }
     this.visible = false;
   }
 }

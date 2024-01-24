@@ -6,7 +6,7 @@
     [tableStyle]="{ 'min-width': '20rem' }"
   >
     <ng-template pTemplate="caption">
-      <h3 style="text-align: center">{{product.Name}}</h3>
+      <h3 style="text-align: center">{{product?.name}}</h3>
     </ng-template>
     <ng-template pTemplate="header" let-shelfProducts>
       <tr>
@@ -22,33 +22,32 @@
     </ng-template>
     <ng-template pTemplate="body" let-productAvailability let-productAvailabilities="columns">
       <tr>
-        <td><span class="p-column-title">Name</span>{{ productAvailability.ProductName }}</td>
+        <td><span class="p-column-title">Name</span>{{ productAvailability.productName }}</td>
         <td>
-          <span class="p-column-title">Weight</span>{{ productAvailability.ProductWeight }}
+          <span class="p-column-title">Weight</span>{{ productAvailability.productWeight }}
         </td>
         <td>
           <span class="p-column-title">Quantity</span
-          >{{ productAvailability.ShelfProductQuantity }}
+          >{{ productAvailability.shelfProductQuantity }}
         </td>
         <td>
           <span class="p-column-title">Storage</span
-          >{{ productAvailability.StorageName }}
+          >{{ productAvailability.storageName }}
         </td>
         <td>
-          <span class="p-column-title">Row</span>{{ productAvailability.StorageRackRow }}
+          <span class="p-column-title">Row</span>{{ productAvailability.storageRackRow }}
         </td>
         <td>
-          <span class="p-column-title">Row position</span>{{ productAvailability.StorageRackRowPosition }}
+          <span class="p-column-title">Row position</span>{{ productAvailability.storageRackRowPosition }}
         </td>
         <td>
-          <span class="p-column-title">Shelf level</span>{{ productAvailability.ShelfLevel }}
+          <span class="p-column-title">Shelf level</span>{{ productAvailability.shelfLevel }}
         </td>
         <td>
-          <span class="p-column-title">Actions</span>
           <p-button
             icon="pi pi-eye"
             styleClass="mr-1 p-2"
-            (onClick)="viewShelf(productAvailability.ShelfId)"
+            (onClick)="viewShelf(productAvailability.shelfId)"
             label="View shelf"
           ></p-button>
         </td>
